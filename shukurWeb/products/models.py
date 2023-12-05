@@ -34,3 +34,13 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.product.name}"
+
+
+class ProductRequest(models.Model):
+    name = models.CharField(max_length=100)
+    details = models.TextField(blank=True)
+    requested_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    status = models.CharField(max_length=50, default='pending')
+
+    def __str__(self):
+        return f"Request for {self.name} by {self.requested_by.username}"

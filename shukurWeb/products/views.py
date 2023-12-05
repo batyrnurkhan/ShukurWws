@@ -4,9 +4,6 @@ from .serializers import ProductSerializer, CategorySerializer
 from django.db.models import Q
 from rest_framework import generics
 
-class ProductListCreateView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
 
 class CategoryListCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
@@ -25,3 +22,16 @@ class ProductListCreateView(generics.ListCreateAPIView):
                 Q(ingredients__icontains=search_param)
             )
         return queryset
+
+from .models import ProductRequest
+from .serializers import ProductRequestSerializer
+from rest_framework.permissions import IsAuthenticated
+
+class ProductRequestCreateView(generics.CreateAPIView):
+    queryset = ProductRequest.objects.all()
+    serializer_class = ProductRequestSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(requested_by=self.request.user)
+
