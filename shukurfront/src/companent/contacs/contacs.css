@@ -1,0 +1,31 @@
+.contacs{
+    max-width: 900px;
+    margin: 0 auto 100px auto;
+}
+.contacs h2{
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+.contacs_c{
+    display: flex;
+    flex-direction: column;
+}
+.contacs_bolt{
+    font-weight: 900;
+    font-size: 24px;
+    margin-bottom: 0;
+}
+.contacs_thin{
+    margin-top: 0;
+}
+.contacs_social{
+    width: 25px;
+    margin-right: 15px;
+}
+.contacs_map{
+    margin-top: 15px;
+}

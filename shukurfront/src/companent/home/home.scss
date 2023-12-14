@@ -1,0 +1,116 @@
+.home_one_text h2{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: #000;
+}
+.home_one_text p{
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+}
+#home_text{
+  margin-top: 68px;
+}
+.home_two img{
+  width: 100%;
+}
+.home_three{
+  margin-top: 105px;
+}
+.home_three h2{
+  font-size: 36px;
+  font-weight: 900;
+}
+.card_shell {
+  padding: 27px;
+  box-shadow: 0px 9px 18px 7px rgba(0, 0, 0, 0.17);
+  border-radius: 10px;
+  display: flex; // Add display flex to align items in a column
+  flex-direction: column; // Stack them vertically
+  align-items: center; // Center align the items
+  justify-content: center; // Center justify the content
+  overflow: hidden; // Hide overflow to maintain the border-radius
+  position: relative; // Set position relative for positioning child elements absolutely if needed
+}
+.card_text{
+  margin-top: 35px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 162.9%; /* 26.064px */
+}
+.card_data{
+  margin-top: 35px;
+  color: #36873E;
+  text-align: right;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 162.9%; /* 26.064px */
+  text-transform: uppercase;
+}
+.card{
+  position: relative;
+}
+.card_left{
+  position: absolute;
+  left: -30px;
+  top: 47%;
+}
+.card_right{
+  right: -30px;
+  position: absolute;
+  top: 47%;
+}
+.card_shell img {
+  width: 100%; // Set width to fill the container
+  height: auto; // Set height to auto to maintain aspect ratio
+  object-fit: cover; // Cover the container with the image without stretching it
+  border-radius: 10px; // Optional: Add if you want rounded corners for images
+}
+.card_shell .image-container {
+  height: 200px; // Adjust the height as needed
+  width: 100%; // Set the width
+  overflow: hidden; // Hide the overflow to maintain aspect ratio
+}
+
+.card_shell .image-container img {
+  height: 100%;
+  width: auto;
+  min-width: 100%; // Ensure it covers the width
+  object-fit: cover; // Cover the area without stretching
+}
+.card_shell a{
+  text-decoration: none;
+  color: #000000;
+}
+.home_ball{
+  display: inline;
+  margin-right: 15px;
+  font-size: 12px;
+  padding: 1px 6px;
+  background: rgba(196,196,196,0.5);
+  border-radius: 90px;
+  color: rgba(0,0,0,0);
+}
+.custom_home_ball{
+  background: rgba(113,113,113,1);
+}
+.home_balls{
+  width: fit-content;
+  margin: 50px auto 42px auto;
+}
+.home_ball.active {
+  background: #36873E;
+  color: #FFFFFF;
+}
+.card_text, .card_data {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+.home_card {
+  margin-bottom: 20px; // This adds 20px of space below each card. Adjust as necessary.
+}
