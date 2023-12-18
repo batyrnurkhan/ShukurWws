@@ -1,0 +1,75 @@
+.product_info{
+    max-width: 1240px;
+    margin: 100px auto 150px auto;
+}
+.pr_inf_mini_img img{
+    margin-top: 70px;
+    width: 130px;
+}
+.pr_inf_1_1{
+    display: flex;
+    justify-content: space-around;
+}
+.pr_inf_mini_img{
+    display: flex;
+    justify-content: space-around;
+}
+.pr_inf_2 h2{
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+.pr_inf_2 h3{
+    color: #36873E;
+
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+}
+.pr_inf_parametr .header{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 0;
+}
+.pr_inf_2 a{
+    color: #FFF;
+
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border-radius: 10px;
+    background: #36873E;
+    padding: 12px 44px;
+    text-decoration: none;
+}
+.pr_inf_2_1{
+    margin-top: 162px;
+}
+.Other_products h2{
+    margin-top: 80px;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+.product_banner .pr_banner_text{
+    margin-left: 10px;
+}
+.pr_banner_img{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.product_banner .pr_banner_img img{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

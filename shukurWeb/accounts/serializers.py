@@ -7,7 +7,7 @@ from .models import Review
 class CustomUserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = CustomUser
-        fields = ("__all__")
+        fields = ('id', 'username', 'email', 'password', 'full_name', 'phone_number','adres',"avatar")
 
 
 class ReviewSerializer(serializers.ModelSerializer):

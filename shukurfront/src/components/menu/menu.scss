@@ -84,3 +84,11 @@
 #menu_bt_last{
   margin-right: 110px;
 }
+.pain{
+  position: relative;
+}
+.pain_baby{
+    position: absolute;
+    top: -12px;
+    z-index: -1;
+}

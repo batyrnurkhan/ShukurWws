@@ -5,8 +5,15 @@ import user from "./user 1.svg"
 import feater from "./Feather Icon.svg"
 import search from "./search (1) 1.png"
 import {Link} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import Auth from "../reg/auth";
+
+const  token=localStorage.getItem("token")
 function Menu() {
+
+    useEffect(()=>{
+        console.log(token)
+    },[])
     return (
         <div>
         <div className={"nav_back"}>
@@ -29,16 +36,19 @@ function Menu() {
             </div>
         </div>
         <div className={"menu_back"}>
+
             <div className={"custom_base"}>
                 <span><Link to={"/"}><img src={logo} className={"logo"}/><span className={"logo_text"}>Shukur</span></Link></span>
                 <span className={"menu_bt_div"}>
                     <span className={"app_button"}><a href={"/"}>Cкачать приложение</a></span>
 
                     <div className={"menu_button"}>
-                        <Link to="/profile">
-                        <img src={user} className={"menu_bt_img"}/>
-                        <div>Личный кабинет</div>
-                        </Link>
+                        {token === "" || token === null ? (<div className={"pain"}><Auth /></div>) :
+                            (<Link to="/profile">
+                                <img src={user} className={"menu_bt_img"}/>
+                                <div>Личный кабинет</div>
+                            </Link>)}
+
                     </div>
                     <div className={"menu_button"}>
                         <Link to="/ratings" >
@@ -57,5 +67,6 @@ function Menu() {
         </div>
         </div>
     )
+
 }
 export default Menu
