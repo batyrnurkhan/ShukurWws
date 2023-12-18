@@ -1,6 +1,7 @@
 import vector from "./Vector.svg"
 import "./Reg.css"
 import {useState} from "react";
+
 function Reg(){
     const [login,loginSet]=useState()
     const [full_name,full_nameSet]=useState()
@@ -8,10 +9,42 @@ function Reg(){
     const [number,numberSet]=useState()
     const [password,passwordSet]=useState()
     const [password_r,password_r_Set]=useState()
+    const [eror,erorSet]=useState("")
 
     const [reg_t,reg_tSet]=useState(false);
     const RegSubmit=()=>{
         reg_tSet(!reg_t)
+    }
+    const PostUser=async (user)=> {
+        console.log(JSON.stringify({
+            username: login,
+            email: email,
+            password: password,
+            full_name: full_name,
+            phone_number: number,
+            adres: null,
+            avatar: null
+        }))
+        if (password === password_r) {
+            return await fetch(' http://127.0.0.1:8000/auth/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: login,
+                    email: email,
+                    password: password,
+                    full_name: full_name,
+                    phone_number: number,
+                    adres: null,
+                    avatar: null
+                })
+            })
+        }
+        else{
+            erorSet("пароли не совпадают")
+        }
     }
     return(
         <diV>
@@ -25,15 +58,15 @@ function Reg(){
                         <input placeholder={"Телефон"} type={"number"} id={"number"} onChange={e=>numberSet(e.target.value)}/>
                         <input placeholder={"Пароль"} type={"password"} id={"password"} onChange={e=>passwordSet(e.target.value)}/>
                         <input placeholder={"Повторите пароль"} type={"password"} id={"password_review"} onChange={e=>password_r_Set(e.target.value)}/>
-                        <button >Зарегестрировать</button>
+                        <button type={"submit"} onClick={()=>PostUser()}>Зарегестрировать</button>
                     </form>
                     <img src={vector} onClick={()=>RegSubmit()}/>
                 </div>
             </div>):
                 (<h3 onClick={()=>RegSubmit()}>Регистрация</h3>)}
         </diV>
-
     )
+
 }
 
 export default Reg
