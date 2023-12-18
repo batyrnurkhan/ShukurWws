@@ -5,6 +5,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-_t&5_o8&vdt_78=*#^qt$ea7%2d5+be3d^@i@2l_5_o+5b&-tk'
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -19,6 +21,8 @@ INSTALLED_APPS = [
     'djoser',
     'rest_framework',
     'rest_framework.authtoken',
+    "ckeditor",
+    "ckeditor_uploader",
     'accounts',
     'products',
     'blogs',
@@ -132,3 +136,6 @@ AUTHENTICATION_BACKENDS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#STATIC_ROOT =os.path.join(BASE_DIR, 'static')
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

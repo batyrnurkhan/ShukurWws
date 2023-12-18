@@ -1,9 +1,17 @@
+from django.views.generic import ListView
 from rest_framework import generics
 from .models import Product, Category
 from .serializers import ProductSerializer, CategorySerializer
 from django.db.models import Q
 from rest_framework import generics
 
+
+class Search(ListView):
+    template_name = "prducts/test.html"
+    context_object_name = "object"
+
+    def get_queryset(self):
+        return Product.objects.filter()
 
 class CategoryListCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()

@@ -1,32 +1,37 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Menu from "./companent/menu/Menu";
-import Home from "./companent/home/home";
-import Footer from "./companent/footer/footer";
-import HigherFooter from "./companent/higher_footer/HigherFooter";
-import UserProfile from "./companent/User_profile/User_Profile";
-import Products from "./companent/products/products";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
+import Profile from './components/Profile';
+import LogoutButton from './components/Logout';
 import PrayerTimesPage from "./components/PrayerTimesPage";
-import Source_mechit from "./companent/source_mechit/Source_mechit"; // Import the PrayerTimesPage component
+import Home from "./components/home/home";
+import Menu from "./components/menu/Menu";
+import Footer from "./components/footer/footer";
+import User_Profile from "./components/User_profile/User_Profile";
 
-function App() {
-    return (
-        <Router>
-            <div>
-                <Menu />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/user-profile" element={<UserProfile />} />
-                    <Route path="/products" element={<Products />} />
-                    <Route path="/prayer" element={<Source_mechit />} />
-                    <Route path="/products" element={<Products />} /> {/* Make sure this route is correct */}
+localStorage.setItem("token","e969c4af124c2ffbfa86837a821b4f6e039d1939")
+let authToken=localStorage.getItem("token")
+const App = () => {
+  const [authToken, setAuthToken] = useState(authToken);
 
-                </Routes>
-                <Footer />
-                <HigherFooter />
-            </div>
-        </Router>
-    );
-}
+  return (
+      <Router>
+        <div className="app">
+          <Menu />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<User_Profile authToken={authToken} />} />
+            <Route path="/prayer-times" element={<PrayerTimesPage />} />
+
+          </Routes>
+          {authToken && <LogoutButton onLogout={handleLogout} />}
+        </div>
+        <Footer />
+      </Router>
+  );
+};
 
 export default App;

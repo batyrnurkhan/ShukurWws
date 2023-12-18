@@ -1,7 +1,16 @@
 from rest_framework import generics
-from .models import Review
-from .serializers import ReviewSerializer
+
+
+from .models import Review,CustomUser
+from .serializers import ReviewSerializer,CustomUserCreateSerializer
 #from rest_framework.permissions import IsAuthenticated
+
+class User_profile_View(generics.ListAPIView):
+    serializer_class = CustomUserCreateSerializer
+
+    def get_queryset(self):
+        return CustomUser.objects.filter(id=self.request.user.id)
+
 
 class ReviewListCreateView(generics.ListCreateAPIView):
     queryset = Review.objects.all()

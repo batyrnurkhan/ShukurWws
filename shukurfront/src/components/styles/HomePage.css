@@ -176,7 +176,6 @@
 .blog-section {
     text-align: center;
     padding: 40px 0;
-    background-color: #f9f9f9;
 }
 
 .blog-section h2 {
@@ -314,109 +313,6 @@
     margin-bottom: 10px; /* Adjust the spacing between contact details */
 }
 
-
-.footer {
-    background-color: #2D2D2D; /* Footer background color */
-    color: white; /* Footer text color */
-    padding: 40px 120px; /* Top and bottom padding, Left and right padding */
-    display: flex;
-    justify-content: space-between; /* Space out the content */
-    align-items: start; /* Align content to the top */
-    font-size: 14px; /* Adjust the font size as needed */
-}
-
-.footer-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
-    margin-right: 100px; /* Space after logo column */
-}
-.footer-logo-container {
-    display: flex;
-    align-items: center; /* This will vertically center align items in the container */
-}
-
-.footer-logo {
-    width: 50px; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Add some space between the logo and the text */
-}
-
-
-.footer-nav {
-    display: flex;
-    justify-content: space-between; /* Space between navigation items */
-    width: 40%; /* Adjust width as needed */
-}
-
-.footer-nav-column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
-}
-
-.footer-nav-column h4 {
-    margin-bottom: 10px; /* Space below the column title */
-    font-size: 16px; /* Adjust the font size as needed */
-    color: #FFFFFF; /* Adjust the color as needed */
-}
-
-.footer-nav-column a {
-    color: #FFFFFF; /* Adjust the color as needed */
-    text-decoration: none; /* No underline for links */
-    margin-bottom: 8px; /* Space between links */
-    transition: color 0.3s ease; /* Smooth color transition for hover effect */
-}
-
-.footer-nav-column a:hover {
-    color: #AAAAAA; /* Color on hover */
-}
-
-.footer-search {
-    display: flex;
-    justify-content: flex-end; /* Align search to the right */
-}
-
-.footer-search input {
-    padding: 10px;
-    border: none;
-    border-radius: 20px; /* Rounded corners for input field */
-    width: 250px; /* Adjust the width as needed */
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-    .footer {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .footer-logo {
-        margin-right: 0; /* Remove margin for mobile */
-        margin-bottom: 20px; /* Space below logo on mobile */
-    }
-
-    .footer-nav {
-        width: 100%; /* Full width on mobile */
-        justify-content: center; /* Center navigation on mobile */
-        margin-bottom: 20px; /* Space below navigation on mobile */
-    }
-
-    .footer-search {
-        justify-content: center; /* Center search on mobile */
-    }
-}
-
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column; /* Stack the footer sections on top of each other on small screens */
-    }
-
-    .contact-info, .navigation, .search-bar {
-        align-items: center; /* Center align the items for small screens */
-        margin-bottom: 20px; /* Add some space between the stacked sections */
-    }
-}
 
 
 /* This styles the scrollbar track */

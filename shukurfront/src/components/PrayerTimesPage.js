@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TopNavbar from "./TopNavbar";
 import MainNavbar from "./MainNavbar";
-import Footer from "./Footer";
 const PrayerTimesPage = () => {
     const [prayerTimes, setPrayerTimes] = useState(null);
 
@@ -33,8 +32,6 @@ const PrayerTimesPage = () => {
 
     return (
         <div>
-            <TopNavbar/>
-            <MainNavbar/>
             <h1>Prayer Times</h1>
             {prayerTimes ? (
                 <div>
@@ -57,7 +54,7 @@ const PrayerTimesPage = () => {
             ) : (
                 <p>Loading...</p>
             )}
-            <Footer/>
+
         </div>
     );
 };

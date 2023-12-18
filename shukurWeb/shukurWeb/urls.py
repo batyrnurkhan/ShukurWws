@@ -31,6 +31,7 @@ urlpatterns = [
     path('api/blogs/', include('blogs.urls')),
     path('api/', include('places.urls')),
     path('api/pray/', include('pray.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

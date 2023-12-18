@@ -7,7 +7,7 @@ const Profile = ({ authToken }) => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/auth/users/me/', {
+                const response = await axios.get('http://127.0.0.1:8000/api/accounts/user_profile', {
                     headers: { Authorization: `Token ${authToken}` },
                 });
                 setProfile(response.data);
