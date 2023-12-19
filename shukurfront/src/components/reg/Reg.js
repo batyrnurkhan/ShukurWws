@@ -16,15 +16,6 @@ function Reg(){
         reg_tSet(!reg_t)
     }
     const PostUser=async (user)=> {
-        console.log(JSON.stringify({
-            username: login,
-            email: email,
-            password: password,
-            full_name: full_name,
-            phone_number: number,
-            adres: null,
-            avatar: null
-        }))
         if (password === password_r) {
             return await fetch(' http://127.0.0.1:8000/auth/users/', {
                 method: 'POST',
@@ -41,6 +32,44 @@ function Reg(){
                     avatar: null
                 })
             })
+                .then(data=>{
+                    if(data.status !== 201){
+                        erorSet("Ошибка")
+                    }
+                    else{
+                        fetch("http://127.0.0.1:8000/auth/token/login/",{
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body:JSON.stringify({
+                                password: password,
+                                username: login
+                            })
+
+                        })
+                            .then(data=>{
+                                if(data.status !== 200){
+                                    erorSet("Ошибка")
+                                    console.log("eror")
+                                }
+
+                                else{
+                                    return data.json()
+                                }
+                            })
+                            .then(res=>{
+                                console.log(res.auth_token)
+                                localStorage.setItem("token",res.auth_token)
+                                document.location.reload()
+                            })
+
+                        return data.json()
+                    }
+                })
+                .catch(eror=>{
+                    erorSet(eror)
+                })
         }
         else{
             erorSet("пароли не совпадают")
@@ -58,8 +87,9 @@ function Reg(){
                         <input placeholder={"Телефон"} type={"number"} id={"number"} onChange={e=>numberSet(e.target.value)}/>
                         <input placeholder={"Пароль"} type={"password"} id={"password"} onChange={e=>passwordSet(e.target.value)}/>
                         <input placeholder={"Повторите пароль"} type={"password"} id={"password_review"} onChange={e=>password_r_Set(e.target.value)}/>
-                        <button type={"submit"} onClick={()=>PostUser()}>Зарегестрировать</button>
+                        <button type={"button"} onClick={()=>PostUser()}>Зарегестрировать</button>
                     </form>
+                    <h1>{eror ? eror :""}</h1>
                     <img src={vector} onClick={()=>RegSubmit()}/>
                 </div>
             </div>):

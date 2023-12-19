@@ -14,10 +14,27 @@ import Reg from "./components/reg/Reg";
 import Products from "./components/products/products";
 import Product_info from "./components/product_info/product_info";
 
-localStorage.setItem("token", "")
-
+const token=localStorage.getItem("token")
+//localStorage.clear()
 const App = () => {
-    const [authToken, setAuthToken] = useState("e969c4af124c2ffbfa86837a821b4f6e039d1939");
+
+    const Log_auth=async ()=>{
+        console.log("logauth")
+        await fetch(`http://127.0.0.1:8000/auth/token/logout/`, {
+            method:"POST",
+            headers:{
+                Authorization:`Token ${token}`
+            },
+            body:JSON.stringify({
+                Content:0
+            })
+        })
+            .then(()=>{
+                localStorage.setItem("token","undefined")
+                document.location.reload()
+            })
+            .catch(res=>{console.log(res)})
+    }
 
     return (
         <Router>
@@ -27,7 +44,7 @@ const App = () => {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
-                    <Route path="/profile" element={<User_Profile authToken={authToken}/>}/>
+                    <Route path="/profile" element={<User_Profile authToken={token}/>}/>
                     <Route path="/prayer-times" element={<PrayerTimesPage/>}/>
                     <Route path="/map" element={<Source_mechit/>}/>
                     <Route path={"/reviews"} element={<Product_info />}/>

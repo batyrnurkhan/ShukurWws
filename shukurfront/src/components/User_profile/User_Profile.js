@@ -7,6 +7,8 @@ import arrow from "./Group 94.svg"
 import product from "../products/pngegg (36) 1.png";
 import {useEffect, useState} from "react";
 import axios from "axios";
+
+
 function User_Profile({ authToken }){
     const [profile, setProfile] = useState(null);
 

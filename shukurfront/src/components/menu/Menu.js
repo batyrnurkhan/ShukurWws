@@ -11,9 +11,6 @@ import Auth from "../reg/auth";
 const  token=localStorage.getItem("token")
 function Menu() {
 
-    useEffect(()=>{
-        console.log(token)
-    },[])
     return (
         <div>
         <div className={"nav_back"}>

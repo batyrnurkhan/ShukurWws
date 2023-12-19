@@ -119,14 +119,14 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    'SERIALIZERS': {
+'SERIALIZERS': {
         'user_create': 'accounts.serializers.CustomUserCreateSerializer',
         # ... other Djoser settings ...
     },
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
+
 }
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTH_USER_MODEL = 'accounts.CustomUser'
