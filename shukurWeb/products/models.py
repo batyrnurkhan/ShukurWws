@@ -10,6 +10,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     certified = models.BooleanField(default=False)
+    img=models.ImageField(upload_to="photos/%Y/%m/%d/")
     rating = models.FloatField(default=0.0)
     details = models.TextField()
     ingredients = models.TextField()
@@ -33,12 +34,6 @@ class ProductRating(models.Model):
         return f"{self.product.name} - {self.rating}"
 
 
-class ProductImage(models.Model):
-    product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='product_images/')
-
-    def __str__(self):
-        return f"Image for {self.product.name}"
 
 
 class ProductRequest(models.Model):

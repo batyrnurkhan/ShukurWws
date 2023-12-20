@@ -7,6 +7,7 @@ import arrow from "./Group 94.svg"
 import product from "../products/pngegg (36) 1.png";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 
 function User_Profile({ authToken }){
@@ -27,10 +28,28 @@ function User_Profile({ authToken }){
 
         fetchProfile();
     }, [authToken]);
+    const Log_auth=async ()=>{
+        console.log("logauth")
+        await fetch(`http://127.0.0.1:8000/auth/token/logout/`, {
+            method:"POST",
+            headers:{
+                Authorization:`Token ${authToken}`
+            },
+            body:JSON.stringify({
+                Content:0
+            })
+        })
+            .then(()=>{
+                localStorage.setItem("token","")
+                window.location.href =""
+            })
+            .catch(res=>{console.log(res)})
+    }
     return(
         <div>
             {profile?(
                 <div>
+                    <Link to={"/"} className={"logauth"}><h1 onClick={()=>Log_auth()} >Выйти</h1></Link>
                     <div className={"User_profile_header"}>
                         <h2 className={"UP_h2"}>Личный кабинет</h2>
                     </div>

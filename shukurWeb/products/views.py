@@ -1,9 +1,14 @@
 from django.views.generic import ListView
 from rest_framework import generics
-from .models import Product, Category,Frequently_viewed
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .models import Product, Category, Frequently_viewed
 from .serializers import ProductSerializer, CategorySerializer, Frequently_viewed_products_serializers
 from django.db.models import Q
 from rest_framework import generics
+
+
 
 class Product_View(generics.ListAPIView):
     serializer_class = ProductSerializer

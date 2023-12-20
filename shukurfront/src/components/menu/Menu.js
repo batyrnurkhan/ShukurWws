@@ -40,7 +40,7 @@ function Menu() {
                     <span className={"app_button"}><a href={"/"}>Cкачать приложение</a></span>
 
                     <div className={"menu_button"}>
-                        {token === "" || token === null ? (<div className={"pain"}><Auth /></div>) :
+                        {token === "" || token === null || token === undefined ? (<div className={"pain"}><Auth /></div>) :
                             (<Link to="/profile">
                                 <img src={user} className={"menu_bt_img"}/>
                                 <div>Личный кабинет</div>

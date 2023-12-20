@@ -18,23 +18,7 @@ const token=localStorage.getItem("token")
 //localStorage.clear()
 const App = () => {
 
-    const Log_auth=async ()=>{
-        console.log("logauth")
-        await fetch(`http://127.0.0.1:8000/auth/token/logout/`, {
-            method:"POST",
-            headers:{
-                Authorization:`Token ${token}`
-            },
-            body:JSON.stringify({
-                Content:0
-            })
-        })
-            .then(()=>{
-                localStorage.setItem("token","undefined")
-                document.location.reload()
-            })
-            .catch(res=>{console.log(res)})
-    }
+
 
     return (
         <Router>
