@@ -20,10 +20,11 @@ class ProductSerializer(serializers.ModelSerializer):
         return obj.category.name
 
 class Frequently_viewed_products_serializers(serializers.ModelSerializer):
-     content=serializers.StringRelatedField(many=True)
-     class Meta:
-         model=Frequently_viewed
-         fields = "__all__"
+    content=ProductSerializer(many=True)
+
+    class Meta:
+        model = Frequently_viewed
+        fields = "__all__"
 
 class ProductRatingSerializer(serializers.ModelSerializer):
     class Meta:
