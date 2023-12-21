@@ -4,31 +4,29 @@ import banner from "./image 2.png"
 import left from "./left.svg"
 import right from "./right.svg"
 import {useEffect, useState} from "react";
-import Services from "../../services/services";
-const serviecs=new Services()
-function Products(){
+import {Link} from "react-router-dom";
+import {renderToStaticMarkup} from "react-dom/server";
+
+
+function Products({services}){
     const [product_list,product_listSet]=useState()
     const [product_list_n,product_list_nSet]=useState()
     const [product_list_f,product_list_fSet]=useState()
     useEffect(()=>{
-        serviecs.GetResource("api/products/certify")
+        services.GetResource("api/products/certify")
             .then(res=>{
                 product_listSet(res)
 
             })
 
-        serviecs.GetResource("api/products/not_certify")
+        services.GetResource("api/products/not_certify")
             .then(res=>{
                 console.log(res)
                 product_list_nSet(res)
             })
 
-        fetch("http://127.0.0.1:8000/api/products/frequently_viewed")
-            .then(data=>{
-                return data.json()
-            })
+        services.GetResource("api/products/frequently_viewed")
             .then(res=>{
-                console.log(res[0].content)
                 product_list_fSet(res[0].content)
             })
 
@@ -49,15 +47,18 @@ function Products(){
                 <div className={"product_row row"}>
                     {product_list.map(res=>{
                         return (
-                            <div className={"col-lg-2 pr_card"}>
-                                <div className={"img_layer"}><img src={res.img}/></div>
-                                <div className={"text_layer"}>
-                                    <p className={"pr_card_bolt"}>{res.name}</p>
-                                    <p className={"pr_card_text"}>{res.details}</p>
-                                    <p className={"pr_card_label"}>Халяльный</p>
-                                </div>
 
+                            <div className={"col-lg-2 pr_card"}>
+                                <Link to={`/reviews/${res.id}`} className={"not_link"}>
+                                    <div className={"img_layer"}><img src={res.img}/></div>
+                                    <div className={"text_layer"}>
+                                        <p className={"pr_card_bolt"}>{res.name}</p>
+                                        <p className={"pr_card_text"}>{res.details}</p>
+                                        <p className={"pr_card_label"}>Халяльный</p>
+                                    </div>
+                                </Link>
                             </div>
+
                         )
                     })}
                 </div>
@@ -76,15 +77,18 @@ function Products(){
                     <div className={"product_row row"}>
                         {product_list_n.map(res=>{
                             return (
-                                <div className={"col-lg-2 pr_card not_halal"}>
-                                    <div className={"img_layer"}><img src={res.img}/></div>
-                                    <div className={"text_layer"}>
-                                        <p className={"pr_card_bolt"}>{res.name}</p>
-                                        <p className={"pr_card_text"}>{res.details}</p>
-                                        <p className={"pr_card_label"}>Не халяльный</p>
+
+                                    <div className={"col-lg-2 pr_card not_halal"}>
+                                        <Link to={`/reviews/${res.id}`} className={"not_link"}>
+                                            <div className={"img_layer"}><img src={res.img}/></div>
+                                            <div className={"text_layer"}>
+                                                <p className={"pr_card_bolt"}>{res.name}</p>
+                                                <p className={"pr_card_text"}>{res.details}</p>
+                                                <p className={"pr_card_label"}>Не халяльный</p>
+                                            </div>
+                                        </Link>
                                     </div>
 
-                                </div>
                             )
                         })}
                     </div>
@@ -98,23 +102,30 @@ function Products(){
 
                         {product_list_f.map(res=>{
                             return (
+
                                 <div className={"col-lg-2 pr_card"}>
-                                {res.certified?(<div >
-                                        <div className={"img_layer"}><img src={res.img}/></div>
-                                        <div className={"text_layer"}>
-                                            <p className={"pr_card_bolt"}>{res.name}</p>
-                                            <p className={"pr_card_text"}>{res.details}</p>
-                                            <p className={"pr_card_label"}>Халяльный</p>
-                                        </div>
+                                {res.certified? (
+                                    <div>
+                                        <Link to={`/reviews/${res.id}`} className={"not_link"}>
+                                            <div className={"img_layer"}><img src={res.img}/></div>
+                                            <div className={"text_layer"}>
+                                                <p className={"pr_card_bolt"}>{res.name}</p>
+                                                <p className={"pr_card_text"}>{res.details}</p>
+                                                <p className={"pr_card_label"}>Халяльный</p>
+                                            </div>
+                                        </Link>
+                                    </div>
 
-                                    </div>):(<div >
-                                        <div className={"img_layer"}><img src={res.img}/></div>
-                                        <div className={"text_layer"}>
-                                            <p className={"pr_card_bolt"}>{res.name}</p>
-                                            <p className={"pr_card_text"}>{res.details}</p>
-                                            <p className={"pr_card_label"}>Не халяльный</p>
-                                        </div>
-
+                                ):(
+                                    <div >
+                                        <Link to={`/reviews/${res.id}`} className={"not_link"}>
+                                            <div className={"img_layer"}><img src={res.img}/></div>
+                                            <div className={"text_layer"}>
+                                                <p className={"pr_card_bolt"}>{res.name}</p>
+                                                <p className={"pr_card_text"}>{res.details}</p>
+                                                <p className={"pr_card_label"}>Не халяльный</p>
+                                            </div>
+                                        </Link>
                                     </div>)}
                                 </div>
                             )

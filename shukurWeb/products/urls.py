@@ -9,4 +9,5 @@ urlpatterns = [
     path("certify",Product_View_certifided.as_view()),
     path("not_certify",Product_View_not_certifided.as_view()),
     path("frequently_viewed",Frequently_viewed_View.as_view()),
+    path("view/<int:pk>",Product_Raiting_View.as_view())
 ]

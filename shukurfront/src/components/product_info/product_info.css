@@ -10,6 +10,9 @@
     display: flex;
     justify-content: space-around;
 }
+.pr_inf_1_1 img{
+    width: 100%;
+}
 .pr_inf_mini_img{
     display: flex;
     justify-content: space-around;
@@ -72,4 +75,11 @@
 .product_banner .pr_banner_img img{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.pr_inf_2 .not_halal{
+    color: #FF2727;;
+}
+.not_link{
+    text-decoration: none;
+    color: inherit;
 }

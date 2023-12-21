@@ -1,36 +1,49 @@
 import cola from "./pngegg (36) 3.png"
 import "./product_info.css"
 import "../products/products.css"
-import product from "../products/pngegg (36) 1.png";
+import product2 from "../products/pngegg (36) 1.png";
 import banner from "./image 5.png";
-function product_info(){
+import {useEffect, useState} from "react";
+import { useParams } from 'react-router-dom';
+function Product_info({ services }){
+    const { id } = useParams();
+    const [product,productSet]=useState()
+    useEffect(()=>{
+        services.GetResource(   `api/products/view/${id}`)
+            .then(res=>{
+                productSet(res)
+            })
+
+    },[])
     return(
-        <div className={"product_info"}>
+        <diV>
+        {product ? (<div className={"product_info"}>
             <div className={"row"}>
                 <div className={"col-lg-5 pr_inf_1"}>
                     <div className={"pr_inf_1_1"}>
-                        <img src={cola}/>
+                        <img src={product.img}/>
                     </div>
                     <div className={"pr_inf_mini_img"}>
-                        <img src={cola}/>
-                        <img src={cola}/>
-                        <img src={cola}/>
+                        <img src={product.img}/>
+                        <img src={product.img}/>
+                        <img src={product.img}/>
                     </div>
                 </div>
                 <div className={"col-lg-7 pr_inf_2"}>
-                    <h2>Название товара</h2>
-                    <h3>Халяльный</h3>
+                    <h2>{product.name}</h2>
+                    {product.certified?(<h3>Халяльный</h3>):(<h3 className={"not_halal"}>Не халяльный</h3>)}
+
                     <div className={"pr_inf_parametr"}>
                         <p className={"header"}>Параметры:</p>
-                        <p className={"text"}>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <p className={"text"}>{product.parameter}</p>
                     </div>
                     <div className={"pr_inf_parametr"}>
                         <p className={"header"}>Состав</p>
-                        <p className={"text"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna.</p>
+                        <p className={"text"}>{product.ingredients}</p>
                     </div>
                     <div className={"pr_inf_parametr"}>
                         <p className={"header"}>Описание:</p>
-                        <p className={"text"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla.</p>
+                        <p className={"text"}>{product.details}</p>
                     </div>
                     <div className={"pr_inf_2_1"}>
                         <a href={"/"}>Оставить отзыв</a>
@@ -41,7 +54,7 @@ function product_info(){
                 <h2>Другие товары</h2>
                 <div className={"product_row row pr_slaider"}>
                     <div className={"col-lg-2 pr_card"}>
-                        <div className={"img_layer"}><img src={product}/></div>
+                        <div className={"img_layer"}><img src={product2}/></div>
                         <div className={"text_layer"}>
                             <p className={"pr_card_bolt"}>Название товара</p>
                             <p className={"pr_card_text"}>Описание гамака, основные параметры, материал</p>
@@ -50,7 +63,7 @@ function product_info(){
 
                     </div>
                     <div className={"col-lg-2 pr_card"}>
-                        <div className={"img_layer"}><img src={product}/></div>
+                        <div className={"img_layer"}><img src={product2}/></div>
                         <div className={"text_layer"}>
                             <p className={"pr_card_bolt"}>Название товара</p>
                             <p className={"pr_card_text"}>Описание гамака, основные параметры, материал</p>
@@ -59,7 +72,7 @@ function product_info(){
 
                     </div>
                     <div className={"col-lg-2 pr_card"}>
-                        <div className={"img_layer"}><img src={product}/></div>
+                        <div className={"img_layer"}><img src={product2}/></div>
                         <div className={"text_layer"}>
                             <p className={"pr_card_bolt"}>Название товара</p>
                             <p className={"pr_card_text"}>Описание гамака, основные параметры, материал</p>
@@ -68,7 +81,7 @@ function product_info(){
 
                     </div>
                     <div className={"col-lg-2 pr_card"}>
-                        <div className={"img_layer"}><img src={product}/></div>
+                        <div className={"img_layer"}><img src={product2}/></div>
                         <div className={"text_layer"}>
                             <p className={"pr_card_bolt"}>Название товара</p>
                             <p className={"pr_card_text"}>Описание гамака, основные параметры, материал</p>
@@ -88,7 +101,11 @@ function product_info(){
                     <img src={banner}/>
                 </div>
             </div>
-        </div>
+        </div>):
+            (<h1>loading...</h1>)}
+
+
+        </diV>
     )
 }
-export default product_info
+export default Product_info

@@ -13,8 +13,10 @@ import Source_mechit from "./components/source_mechit/Source_mechit";
 import Reg from "./components/reg/Reg";
 import Products from "./components/products/products";
 import Product_info from "./components/product_info/product_info";
+import Services from "./services/services";
 
 const token=localStorage.getItem("token")
+const services=new Services()
 //localStorage.clear()
 const App = () => {
 
@@ -30,8 +32,8 @@ const App = () => {
                     <Route path="/profile" element={<User_Profile authToken={token}/>}/>
                     <Route path="/prayer-times" element={<PrayerTimesPage/>}/>
                     <Route path="/map" element={<Source_mechit/>}/>
-                    <Route path={"/reviews"} element={<Product_info />}/>
-                    <Route path={"/product-search"} element={<Products />}/>
+                    <Route path={"/reviews/:id"} element={<Product_info services={services} />}/>
+                    <Route path={"/product-search"} element={<Products services={services} />}/>
                 </Routes>
             </div>
             <Footer/>

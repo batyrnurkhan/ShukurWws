@@ -9,6 +9,9 @@ from django.db.models import Q
 from rest_framework import generics
 
 
+class Product_Raiting_View(generics.RetrieveAPIView):
+    serializer_class = ProductSerializer
+    queryset = Product.objects.all()
 
 class Product_View(generics.ListAPIView):
     serializer_class = ProductSerializer
