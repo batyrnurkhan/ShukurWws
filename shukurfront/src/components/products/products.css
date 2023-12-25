@@ -138,7 +138,7 @@
     text-align: center;
     margin-bottom: 32px;
 }
-.not_halal .pr_card_label{
+.not_halal{
     color: #FF2727;
 }
 .Frequently_viewed h2{
@@ -163,4 +163,7 @@
     position: absolute;
     right: 50px;
     top: 177px;
+}
+.carousel-container{
+    max-width: none;
 }

@@ -6,9 +6,7 @@ import React, {useEffect, useState} from "react";
 
 
 import '../styles/HomePage.css';
-import logo from '../HomePageStyle/logo.png'; // Make sure this is the correct path to your logo image
-import logoText from '../HomePageStyle/ShukurText.png';
-import heroImage from '../HomePageStyle/homepage1back.png'; // Path to the hero image used in the screenshot
+
 import axios from 'axios'; // make sure to install axios with `npm install axios`
 import {Link} from "react-router-dom";
 import arrowBack from '../HomePageStyle/arrowback.png'; // Adjust the path as necessary

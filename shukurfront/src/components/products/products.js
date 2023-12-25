@@ -3,15 +3,19 @@ import product from "./pngegg (36) 1.png"
 import banner from "./image 2.png"
 import left from "./left.svg"
 import right from "./right.svg"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {renderToStaticMarkup} from "react-dom/server";
+import arrowBack from "../HomePageStyle/arrowback.png";
+import arrowNext from "../HomePageStyle/arrownext.png";
 
 
 function Products({services}){
     const [product_list,product_listSet]=useState()
     const [product_list_n,product_list_nSet]=useState()
-    const [product_list_f,product_list_fSet]=useState()
+
+    const [blogs, setBlogs] = useState([]);
+    const [activeIndex, setActiveIndex] = useState(0); // To keep track of the current active card
     useEffect(()=>{
         services.GetResource("api/products/certify")
             .then(res=>{
@@ -27,14 +31,32 @@ function Products({services}){
 
         services.GetResource("api/products/frequently_viewed")
             .then(res=>{
-                product_list_fSet(res[0].content)
+                setBlogs(res[0].content)
             })
 
 
     },[])
+    const moveCard = (direction) => {
+        setActiveIndex((current) => {
+            // Calculate the new index based on direction and wrap around if needed
+            if (direction === 'next') {
+                return (current + 1) % blogs.length;
+            } else {
+                return (current - 1 + blogs.length) % blogs.length;
+            }
+        });
+    };
+
+    const renderDots = () => {
+        const totalDots = Math.ceil(blogs.length / 4);
+        return [...Array(totalDots)].map((_, idx) => (
+            <span key={idx} className={`dot ${activeIndex === idx ? 'active' : ''}`}
+                  onClick={() => setActiveIndex(idx)}></span>
+        ));
+    };
     return(
         <div>
-            {product_list ? (<div className={"products"}>
+            {product_list && product_list_n && blogs ? (<div className={"products"}>
                 <h2 className={"pr_h2"}>Продукты</h2>
                 <ul className={"pr_bar"}>
                     <li><a href={"/"}>Все товары</a></li>
@@ -45,9 +67,9 @@ function Products({services}){
                 <h2 className={"pr_h2_two"}>Халяльные продукты</h2>
 
                 <div className={"product_row row"}>
+
                     {product_list.map(res=>{
                         return (
-
                             <div className={"col-lg-2 pr_card"}>
                                 <Link to={`/reviews/${res.id}`} className={"not_link"}>
                                     <div className={"img_layer"}><img src={res.img}/></div>
@@ -78,13 +100,13 @@ function Products({services}){
                         {product_list_n.map(res=>{
                             return (
 
-                                    <div className={"col-lg-2 pr_card not_halal"}>
+                                    <div className={"col-lg-2 pr_card "}>
                                         <Link to={`/reviews/${res.id}`} className={"not_link"}>
                                             <div className={"img_layer"}><img src={res.img}/></div>
                                             <div className={"text_layer"}>
                                                 <p className={"pr_card_bolt"}>{res.name}</p>
                                                 <p className={"pr_card_text"}>{res.details}</p>
-                                                <p className={"pr_card_label"}>Не халяльный</p>
+                                                <p className={"pr_card_label not_halal"}>Не халяльный</p>
                                             </div>
                                         </Link>
                                     </div>
@@ -94,44 +116,52 @@ function Products({services}){
                     </div>
 
                 </div>
-                <div className={"Frequently_viewed"}>
-                    <h2>Часто просматривают</h2>
-                    <div className={"product_row row pr_slaider"}>
-                        <img src={left} className={"pr_left"}/>
-                        <img src={right} className={"pr_right"}/>
 
-                        {product_list_f.map(res=>{
-                            return (
+                    <section className={"blog-section Frequently_viewed"}>
+                        <h2>Новости и статьи</h2>
+                        <div className="carousel-container">
+                            <button onClick={() => moveCard('prev')} className="arrow-prev">
+                                <img src={arrowBack} alt="Previous"/>
+                            </button>
+                            <div className="card-container product_row row">
+                                {blogs.slice(activeIndex, activeIndex + 4)
+                                    .concat(blogs.slice(0, Math.max(0, activeIndex + 4 - blogs.length)))
+                                    .map((res, index) => (
+                                        <div className={"col-lg-2 pr_card"}>
+                                            {res.certified? (
+                                                <div>
+                                                    <Link to={`/reviews/${res.id}`} className={"not_link"}>
+                                                        <div className={"img_layer"}><img src={res.img}/></div>
+                                                        <div className={"text_layer"}>
+                                                            <p className={"pr_card_bolt"}>{res.name}</p>
+                                                            <p className={"pr_card_text"}>{res.details}</p>
+                                                            <p className={"pr_card_label"}>Халяльный</p>
+                                                        </div>
+                                                    </Link>
+                                                </div>
 
-                                <div className={"col-lg-2 pr_card"}>
-                                {res.certified? (
-                                    <div>
-                                        <Link to={`/reviews/${res.id}`} className={"not_link"}>
-                                            <div className={"img_layer"}><img src={res.img}/></div>
-                                            <div className={"text_layer"}>
-                                                <p className={"pr_card_bolt"}>{res.name}</p>
-                                                <p className={"pr_card_text"}>{res.details}</p>
-                                                <p className={"pr_card_label"}>Халяльный</p>
-                                            </div>
-                                        </Link>
-                                    </div>
-
-                                ):(
-                                    <div >
-                                        <Link to={`/reviews/${res.id}`} className={"not_link"}>
-                                            <div className={"img_layer"}><img src={res.img}/></div>
-                                            <div className={"text_layer"}>
-                                                <p className={"pr_card_bolt"}>{res.name}</p>
-                                                <p className={"pr_card_text"}>{res.details}</p>
-                                                <p className={"pr_card_label"}>Не халяльный</p>
-                                            </div>
-                                        </Link>
-                                    </div>)}
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
+                                            ):(
+                                                <div >
+                                                    <Link to={`/reviews/${res.id}`} className={"not_link"}>
+                                                        <div className={"img_layer"}><img src={res.img}/></div>
+                                                        <div className={"text_layer"}>
+                                                            <p className={"pr_card_bolt"}>{res.name}</p>
+                                                            <p className={"pr_card_text"}>{res.details}</p>
+                                                            <p className={"pr_card_label not_halal"}>Не халяльный</p>
+                                                        </div>
+                                                    </Link>
+                                                </div>)}
+                                        </div>
+                                    ))}
+                            </div>
+                            <button onClick={() => moveCard('next')} className="arrow-next">
+                                <img src={arrowNext} alt="Next"/>
+                            </button>
+                        </div>
+                        <div className="dots-container">
+                            {renderDots()}
+                        </div>
+                    </section>
             </div>):
             <h1>loading...</h1>}
         </div>
