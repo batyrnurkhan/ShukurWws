@@ -1,6 +1,4 @@
 from django.contrib import admin
-from .models import Place
+from .models import Rec_places
 
-@admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
-    list_display = ['name', 'certified', 'halal', 'alcohol', 'rating', 'prayer_facility', 'address']
+admin.site.register(Rec_places)

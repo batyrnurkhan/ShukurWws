@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import PlaceListCreateView, PlaceDetailView
+from .views import Rec_palces_views
 
 urlpatterns = [
-    path('places/', PlaceListCreateView.as_view(), name='place-list'),
-    path('places/<int:pk>/', PlaceDetailView.as_view(), name='place-detail'),
+    path("",Rec_palces_views.as_view())
 ]

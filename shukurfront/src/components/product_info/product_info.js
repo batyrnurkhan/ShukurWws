@@ -7,14 +7,14 @@ import {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
 function Product_info({ services }){
     const { id } = useParams();
-    const [product,productSet]=useState()
-    useEffect(()=>{
-        services.GetResource(   `api/products/view/${id}`)
-            .then(res=>{
-                productSet(res)
-            })
+    const [product, productSet] = useState();
 
-    },[])
+    useEffect(() => {
+        services.GetResource(`api/products/view/${id}`)
+            .then(res => {
+                productSet(res);
+            })
+    }, [id]);
     return(
         <diV>
         {product ? (<div className={"product_info"}>

@@ -6,11 +6,17 @@ import hz from "./hz.png"
 import image_one from "./image 1.png"
 import star_two from "./star 2.png"
 import { YMaps, Map,Placemark,Panorama} from '@pbe/react-yandex-maps';
+import {useEffect, useState} from "react";
 
 
-function Source_mechit(){
-
-
+function Source_mechit({services}){
+    const [places,placesSet]=useState()
+    useEffect(() => {
+        services.GetResource("/api")
+            .then(res=>{
+                placesSet(res)
+            })
+    }, []);
     return(
         <div className={"Sourceaa-mechit"}>
             <YMaps>
@@ -18,19 +24,26 @@ function Source_mechit(){
 
                     <Map defaultState={{ center: [43.235151848798054, 76.90987228082611], zoom: 9 ,controls: ["zoomControl", "fullscreenControl"],}} style={{ width:"100%",height:"450px"}}
                          modules={["control.ZoomControl", "control.FullscreenControl"]}>
-                        <Placemark geometry={[43.235151848798054, 76.90987228082611]}
-                                   modules={["geoObject.addon.balloon", 'geoObject.addon.hint']}
-                                   options={
-                                       {
-                                           iconColor: 'green', // цвет иконки, можно также задавать в hex
-                                       } }
-                                   properties={
-                                       {
-                                           hintContent: '<b> Я появляюсь при наведении на метку </b>',
-                                           // создаём пустой элемент с заданными размерами
-                                           balloonContent: '<div class="driver-card">15</div>',
-                                       }	}
-                        />
+                        {places ? (places.map(res=>{
+                            return(
+                                res.index=res.location.indexOf(","),
+                                <Placemark geometry={[res.location.slice(0,res.index), res.location.slice(res.index +1,res.location.length)]}
+                                           modules={["geoObject.addon.balloon", 'geoObject.addon.hint']}
+                                           options={
+                                               {
+                                                   iconColor: 'green', // цвет иконки, можно также задавать в hex
+                                               } }
+                                           properties={
+                                               {
+                                                   hintContent: '<b> Нажмите на метку </b>',
+                                                   // создаём пустой элемент с заданными размерами
+                                                   balloonContent: `<div class="driver-card">${res.name}</div>`,
+                                               }
+                                            }
+                                />
+                            )
+                        })):<h1>Loading...</h1>}
+
                     </Map>
 
                 </div>
