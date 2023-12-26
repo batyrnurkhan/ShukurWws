@@ -28,7 +28,7 @@ function Footer() {
 
     const handleProductClick = (productId) => {
     window.scrollTo(0, 0); // Add this line to scroll to the top
-    navigate(`/products/${productId}`);
+    navigate(`/reviews/${productId}`);
 };
 
 

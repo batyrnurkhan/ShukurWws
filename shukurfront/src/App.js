@@ -36,6 +36,8 @@ const App = () => {
                     <Route path="/map" element={<Source_mechit/>}/>
                     <Route path={"/reviews/:id"} element={<Product_info services={services} />}/>
                     <Route path={"/product-search"} element={<Products services={services} />}/>
+
+
                 </Routes>
             </div>
             <Footer/>
