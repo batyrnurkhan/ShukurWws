@@ -18,7 +18,19 @@ function Source_mechit(){
 
                     <Map defaultState={{ center: [43.235151848798054, 76.90987228082611], zoom: 9 ,controls: ["zoomControl", "fullscreenControl"],}} style={{ width:"100%",height:"450px"}}
                          modules={["control.ZoomControl", "control.FullscreenControl"]}>
-                        <Placemark geometry={[43.235151848798054, 76.90987228082611]} />
+                        <Placemark geometry={[43.235151848798054, 76.90987228082611]}
+                                   modules={["geoObject.addon.balloon", 'geoObject.addon.hint']}
+                                   options={
+                                       {
+                                           iconColor: 'green', // цвет иконки, можно также задавать в hex
+                                       } }
+                                   properties={
+                                       {
+                                           hintContent: '<b> Я появляюсь при наведении на метку </b>',
+                                           // создаём пустой элемент с заданными размерами
+                                           balloonContent: '<div class="driver-card">15</div>',
+                                       }	}
+                        />
                     </Map>
 
                 </div>

@@ -1,0 +1,161 @@
+.higher_footer{
+    background: url("Rectangle 9.png") no-repeat;
+    background-size: cover;
+}
+.higher_footer_b{
+    background: rgba(0, 0, 0, 0.59);
+}
+.hf_container{
+    max-width: 1220px;
+    margin: 0 auto;
+}
+.hf_first h3{
+    color: #FFF;
+
+    font-family: Montserrat;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+.hf_first p{
+    color: #FFF;
+
+    /* main text */
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 162.9%; /* 26.064px */
+    width: 50%;
+}
+.hf_first form{
+    display: flex;
+    flex-direction: column;
+}
+.hf_first textarea{
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.30);
+    padding: 12px 192px 52px 20px;
+}
+.hf_first input{
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.30);
+    padding: 12px 192px 12px 20px;
+}
+.hf_first textarea::placeholder{
+    color: rgba(0, 0, 0, 0.50);
+    /* текст инпута */
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 162.9%; /* 26.064px */
+}
+.hf_first input::placeholder{
+    color: rgba(0, 0, 0, 0.50);
+    /* текст инпута */
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 162.9%; /* 26.064px */
+}
+.hf_first button{
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 162.9%; /* 32.58px */
+    color: #FFFFFF;
+    border-radius: 10px;
+    background: #36873E;
+    padding: 15px 35px;
+    margin-top: 15px;
+    margin-bottom: 125px;
+}
+.hf_card_padding{
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.hf_card{
+    width: 400px;
+    background: white;
+    margin: 120px auto;
+
+}
+.hf_card img{
+    width: 30%;
+    display: block;
+    margin: auto;
+}
+.hf_card .hf_card_one{
+    color: #000;
+
+    text-align: center;
+    /* main text */
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 162.9%; /* 26.064px */
+}
+.hf_card_two{
+    color: rgba(0, 0, 0, 0.50);
+
+    text-align: center;
+    /* текст инпута */
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 162.9%; /* 26.064px */
+    margin-top: 32px;
+}
+.slaider_balls{
+    display: flex;
+    margin: 0 auto;
+}
+.slaider_balls div{
+
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0);
+    background: rgba(113, 113, 113, 0.37);
+    border-radius: 90px;
+    padding: 0 4px;
+    font-size: 8px;
+}
+#loc1{
+    background: rgba(0, 0, 0, 0.37);
+}
+.hf_card_three{
+    color: #26602C;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 10px;
+    border: 1px solid #26602C;
+    display: inline;
+    width: 60%;
+    margin: 30px auto 0 auto;
+    padding: 8px 4px;
+}
+.hf_left{
+    position: absolute;
+    height: 3vw;
+    left: -125px;
+    top: 215px;
+}
+.hf_right{
+    position: absolute;
+    height: 3vw;
+    right: -125px;
+    top: 215px;
+}
