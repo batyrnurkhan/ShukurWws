@@ -3,167 +3,148 @@ import product from "./pngegg (36) 1.png"
 import banner from "./image 2.png"
 import left from "./left.svg"
 import right from "./right.svg"
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import {renderToStaticMarkup} from "react-dom/server";
-import arrowBack from "../HomePageStyle/arrowback.png";
-import arrowNext from "../HomePageStyle/arrownext.png";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import productPlaceholder from "./pngegg (36) 1.png";
+import {useNavigate} from "react-router-dom"; // Placeholder image for products without an image
 
-
-function Products({services}){
-    const [product_list,product_listSet]=useState()
-    const [product_list_n,product_list_nSet]=useState()
-
-    const [blogs, setBlogs] = useState([]);
-    const [activeIndex, setActiveIndex] = useState(0); // To keep track of the current active card
-    useEffect(()=>{
-        services.GetResource("api/products/certify")
-            .then(res=>{
-                product_listSet(res)
-
-            })
-
-        services.GetResource("api/products/not_certify")
-            .then(res=>{
-                console.log(res)
-                product_list_nSet(res)
-            })
-
-        services.GetResource("api/products/frequently_viewed")
-            .then(res=>{
-                setBlogs(res[0].content)
-            })
-
-
-    },[])
-    const moveCard = (direction) => {
-        setActiveIndex((current) => {
-            // Calculate the new index based on direction and wrap around if needed
-            if (direction === 'next') {
-                return (current + 1) % blogs.length;
-            } else {
-                return (current - 1 + blogs.length) % blogs.length;
-            }
-        });
+function Products(){
+    const [certifiedProducts, setCertifiedProducts] = useState([]);
+    const [nonCertifiedProducts, setNonCertifiedProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const navigate = useNavigate();
+    const handleProductClick = (productId) => {
+        navigate(`/products/${productId}`);
     };
 
-    const renderDots = () => {
-        const totalDots = Math.ceil(blogs.length / 4);
-        return [...Array(totalDots)].map((_, idx) => (
-            <span key={idx} className={`dot ${activeIndex === idx ? 'active' : ''}`}
-                  onClick={() => setActiveIndex(idx)}></span>
-        ));
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const [certifiedRes, nonCertifiedRes, categoriesRes] = await Promise.all([
+                    axios.get('http://127.0.0.1:8000/api/products/certified/'),
+                    axios.get('http://127.0.0.1:8000/api/products/non-certified/'),
+                    axios.get('http://127.0.0.1:8000/api/products/categories/')
+                ]);
+                setCertifiedProducts(certifiedRes.data);
+                setNonCertifiedProducts(nonCertifiedRes.data);
+                setCategories(categoriesRes.data);
+            } catch (error) {
+                console.error('Error fetching data', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    const handleCategoryClick = (categoryId) => {
+        setSelectedCategory(categoryId);
+    };
+    const resetCategories = () => {
+        setSelectedCategory(null);
+    };
+
+    const filterByCategory = (products) => {
+        return selectedCategory ? products.filter(p => p.category === selectedCategory) : products;
     };
     return(
-        <div>
-            {product_list && product_list_n && blogs ? (<div className={"products"}>
-                <h2 className={"pr_h2"}>Продукты</h2>
-                <ul className={"pr_bar"}>
-                    <li><a href={"/"}>Все товары</a></li>
-                    <li><a href={"/"}>Гамаки</a></li>
-                    <li><a href={"/"}>Чехлы</a></li>
-                    <li><a href={"/"}>Крепеж</a></li>
-                </ul>
-                <h2 className={"pr_h2_two"}>Халяльные продукты</h2>
-
+        <div className={"products"}>
+            <h2 className={"pr_h2"}>    Продукты</h2>
+            <ul className={"pr_bar"}>
+                <li>
+                    <button onClick={resetCategories}>Все товары</button>
+                </li>
+                {categories.map(category => (
+                    <li key={category.id} onClick={() => handleCategoryClick(category.id)}>
+                        <button>{category.name}</button>
+                    </li>
+                ))}
+            </ul>
+            <h2 className={"pr_h2_two"}>Халяльные продукты</h2>
+            <div className={"product_row row"}>
+                {filterByCategory(certifiedProducts).map(product => (
+                    <div key={product.id} className={"col-lg-2 pr_card"} onClick={() => handleProductClick(product.id)}>
+                        <div className={"img_layer"}>
+                            <img src={productPlaceholder} alt={product.name} />
+                        </div>
+                        <div className={"text_layer"}>
+                            <p className={"pr_card_bolt"}>{product.name}</p>
+                            <p className={"pr_card_text"}>{product.details}</p>
+                            <p className={"pr_card_label"}>Халяльный</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div className={"product_banner row"}>
+                <div className={"col-6 pr_banner_text"}>
+                    <h2>Не нашел нужный продукт?</h2>
+                    <p>В таком случае заполни заявку и мы добавим его в наш список</p>
+                    <a href={"/"}>Оставить заявку</a>
+                </div>
+                <div className={"col-4 pr_banner_img"}>
+                    <img src={banner}/>
+                </div>
+            </div>
+            <div className={"Not_halal"}>
+                <h2>Не халяльные продукты</h2>
                 <div className={"product_row row"}>
-
-                    {product_list.map(res=>{
-                        return (
-                            <div className={"col-lg-2 pr_card"}>
-                                <Link to={`/reviews/${res.id}`} className={"not_link"}>
-                                    <div className={"img_layer"}><img src={res.img}/></div>
-                                    <div className={"text_layer"}>
-                                        <p className={"pr_card_bolt"}>{res.name}</p>
-                                        <p className={"pr_card_text"}>{res.details}</p>
-                                        <p className={"pr_card_label"}>Халяльный</p>
-                                    </div>
-                                </Link>
+                    {filterByCategory(nonCertifiedProducts).map(product => (
+                        <div key={product.id} className={"col-lg-2 pr_card not_halal"}>
+                            <div className={"img_layer"}>
+                                <img src={productPlaceholder} alt={product.name} />
                             </div>
-
-                        )
-                    })}
-                </div>
-                <div className={"product_banner row"}>
-                    <div className={"col-6 pr_banner_text"}>
-                        <h2>Не нашел нужный продукт?</h2>
-                        <p>В таком случае заполни заявку и мы добавим его в наш список</p>
-                        <a href={"/"}>Оставить заявку</a>
-                    </div>
-                    <div className={"col-4 pr_banner_img"}>
-                        <img src={banner}/>
-                    </div>
-                </div>
-                <div className={"Not_halal"}>
-                    <h2>Не халяльные продукты</h2>
-                    <div className={"product_row row"}>
-                        {product_list_n.map(res=>{
-                            return (
-
-                                    <div className={"col-lg-2 pr_card "}>
-                                        <Link to={`/reviews/${res.id}`} className={"not_link"}>
-                                            <div className={"img_layer"}><img src={res.img}/></div>
-                                            <div className={"text_layer"}>
-                                                <p className={"pr_card_bolt"}>{res.name}</p>
-                                                <p className={"pr_card_text"}>{res.details}</p>
-                                                <p className={"pr_card_label not_halal"}>Не халяльный</p>
-                                            </div>
-                                        </Link>
-                                    </div>
-
-                            )
-                        })}
-                    </div>
-
-                </div>
-
-                    <section className={"blog-section Frequently_viewed"}>
-                        <h2>Новости и статьи</h2>
-                        <div className="carousel-container">
-                            <button onClick={() => moveCard('prev')} className="arrow-prev">
-                                <img src={arrowBack} alt="Previous"/>
-                            </button>
-                            <div className="card-container product_row row">
-                                {blogs.slice(activeIndex, activeIndex + 4)
-                                    .concat(blogs.slice(0, Math.max(0, activeIndex + 4 - blogs.length)))
-                                    .map((res, index) => (
-                                        <div className={"col-lg-2 pr_card"}>
-                                            {res.certified? (
-                                                <div>
-                                                    <Link to={`/reviews/${res.id}`} className={"not_link"}>
-                                                        <div className={"img_layer"}><img src={res.img}/></div>
-                                                        <div className={"text_layer"}>
-                                                            <p className={"pr_card_bolt"}>{res.name}</p>
-                                                            <p className={"pr_card_text"}>{res.details}</p>
-                                                            <p className={"pr_card_label"}>Халяльный</p>
-                                                        </div>
-                                                    </Link>
-                                                </div>
-
-                                            ):(
-                                                <div >
-                                                    <Link to={`/reviews/${res.id}`} className={"not_link"}>
-                                                        <div className={"img_layer"}><img src={res.img}/></div>
-                                                        <div className={"text_layer"}>
-                                                            <p className={"pr_card_bolt"}>{res.name}</p>
-                                                            <p className={"pr_card_text"}>{res.details}</p>
-                                                            <p className={"pr_card_label not_halal"}>Не халяльный</p>
-                                                        </div>
-                                                    </Link>
-                                                </div>)}
-                                        </div>
-                                    ))}
+                            <div className={"text_layer"}>
+                                <p className={"pr_card_bolt"}>{product.name}</p>
+                                <p className={"pr_card_text"}>{product.details}</p>
+                                <p className={"pr_card_label "}>Не халяльный</p>
                             </div>
-                            <button onClick={() => moveCard('next')} className="arrow-next">
-                                <img src={arrowNext} alt="Next"/>
-                            </button>
                         </div>
-                        <div className="dots-container">
-                            {renderDots()}
+                    ))}
+                </div>
+            </div>
+            <div className={"Frequently_viewed"}>
+                <h2>Часто просматривают</h2>
+                <div className={"product_row row pr_slaider"}>
+                    <img src={left} className={"pr_left"}/>
+                    <img src={right} className={"pr_right"}/>
+                    <div className={"col-lg-2 pr_card not_halal"}>
+                        <div className={"img_layer"}><img src={product}/></div>
+                        <div className={"text_layer"}>
+                            <p className={"pr_card_bolt"}>Название товара</p>
+                            <p className={"pr_card_text"}>Описание гамака, основные параметры, материал</p>
+                            <p className={"pr_card_label "}>Не халяльный</p>
                         </div>
-                    </section>
-            </div>):
-            <h1>loading...</h1>}
+
+                    </div>
+                    <div className={"col-lg-2 pr_card not_halal"}>
+                        <div className={"img_layer"}><img src={product}/></div>
+                        <div className={"text_layer"}>
+                            <p className={"pr_card_bolt"}>Название товара</p>
+                            <p className={"pr_card_text"}>Описание гамака, основные параметры, материал</p>
+                            <p className={"pr_card_label "}>Не халяльный</p>
+                        </div>
+
+                    </div>
+                    <div className={"col-lg-2 pr_card"}>
+                        <div className={"img_layer"}><img src={product}/></div>
+                        <div className={"text_layer"}>
+                            <p className={"pr_card_bolt"}>Название товара</p>
+                            <p className={"pr_card_text"}>Описание гамака, основные параметры, материал</p>
+                            <p className={"pr_card_label "}>Не халяльный</p>
+                        </div>
+
+                    </div>
+                    <div className={"col-lg-2 pr_card"}>
+                        <div className={"img_layer"}><img src={product}/></div>
+                        <div className={"text_layer"}>
+                            <p className={"pr_card_bolt"}>Название товара</p>
+                            <p className={"pr_card_text"}>Описание гамака, основные параметры, материал</p>
+                            <p className={"pr_card_label "}>Не халяльный</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

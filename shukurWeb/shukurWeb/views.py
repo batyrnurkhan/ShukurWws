@@ -1,12 +1,12 @@
-# views.py
-
-# ... (other imports)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import requests
-
-# views.py
+from django.http import JsonResponse
+from blogs.models import BlogPost
+from products.models import Product
+from blogs.serializers import BlogPostSerializer
+from products.serializers import ProductSerializer
 
 class PrayerTimesView(APIView):
     def get(self, request, id=None):
@@ -21,3 +21,21 @@ class PrayerTimesView(APIView):
         else:
             return Response({"error": "Failed to fetch prayer times"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+def search(request):
+    query = request.GET.get('query', '')
+
+    # Query for Blog Posts
+    blog_posts = BlogPost.objects.filter(title__icontains=query)
+    blog_post_serializer = BlogPostSerializer(blog_posts, many=True)
+
+    # Query for Products
+    products = Product.objects.filter(name__icontains=query)
+    product_serializer = ProductSerializer(products, many=True)
+
+    # Combine results
+    results = {
+        'blog_posts': blog_post_serializer.data,
+        'products': product_serializer.data
+    }
+
+    return JsonResponse(results, safe=False)
