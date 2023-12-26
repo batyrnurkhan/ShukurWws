@@ -67,11 +67,11 @@ const PrayerTimesPage = () => {
             <div className="current-prayer-time">
                 {currentPrayerInfo}
             </div>
-            <ul className="month-tabs clearfix">
-                {/* Generate month tabs */}
-                <li><a href="#january" className="active">Январь</a></li>
-                {/* ... other months */}
-            </ul>
+            {/*<ul className="month-tabs clearfix">*/}
+            {/*    */}
+            {/*    <li><a href="#january" className="active">Январь</a></li>*/}
+            {/*    */}
+            {/*</ul>*/}
             <div className="monthly-prayer-times">
                 <table>
                     <thead>
