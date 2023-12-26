@@ -1,62 +1,97 @@
+// PrayerTimesPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import TopNavbar from "./TopNavbar";
-import MainNavbar from "./MainNavbar";
+import './styles/PrayerTimesPage.css';
+
 const PrayerTimesPage = () => {
     const [prayerTimes, setPrayerTimes] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Function to fetch prayer times
+    const fetchPrayerTimes = () => {
+        const apiURL = `https://namaztimes.kz/api/praytimes`;
+        fetch(apiURL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setPrayerTimes(data);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setIsLoading(false);
+            });
+    };
 
     useEffect(() => {
-        const fetchPrayerTimes = async (lat, lng) => {
-            try {
-                const response = await axios.get(`https://namaztimes.kz/api/praytimes?lat=${lat}&lng=${lng}`);
-                setPrayerTimes(response.data);
-            } catch (error) {
-                console.error('Error fetching prayer times:', error);
-            }
-        };
-
-        const getLocation = () => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    fetchPrayerTimes(position.coords.latitude, position.coords.longitude);
-                }, (error) => {
-                    console.error('Error getting location:', error);
-                });
-            } else {
-                console.log("Geolocation is not supported by this browser.");
-            }
-        };
-
-        getLocation();
+        fetchPrayerTimes();
     }, []);
 
-    return (
-        <div>
-            <h1>Prayer Times</h1>
-            {prayerTimes ? (
-                <div>
-                    <p>Date: {prayerTimes.date}</p>
-                    <p>Islamic Date: {prayerTimes.islamic_date}</p>
-                    <p>Imsak: {prayerTimes.praytimes.imsak}</p>
-                    <p>Fajr (Bamdat): {prayerTimes.praytimes.bamdat}</p>
-                    <p>Sunrise (Kun): {prayerTimes.praytimes.kun}</p>
-                    <p>Ishraq: {prayerTimes.praytimes.ishraq}</p>
-                    <p>Kerahat: {prayerTimes.praytimes.kerahat}</p>
-                    <p>Dhuhr (Besin): {prayerTimes.praytimes.besin}</p>
-                    <p>Asr (Asriauual): {prayerTimes.praytimes.asriauual}</p>
-                    <p>Asr (Second - Ekindi): {prayerTimes.praytimes.ekindi}</p>
-                    <p>Isfirar: {prayerTimes.praytimes.isfirar}</p>
-                    <p>Maghrib (Aqsham): {prayerTimes.praytimes.aqsham}</p>
-                    <p>Ishtibaq: {prayerTimes.praytimes.ishtibaq}</p>
-                    <p>Isha (Quptan): {prayerTimes.praytimes.quptan}</p>
-                    <p>Tahajjud (Ishaisani): {prayerTimes.praytimes.ishaisani}</p>
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+    const getCurrentPrayer = () => {
+        const now = new Date();
+        const currentTime = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
 
+        const prayerSchedule = prayerTimes.praytimes;
+        const prayers = Object.keys(prayerSchedule).map(key => {
+            return { name: key, time: prayerSchedule[key] };
+        });
+
+        for (let i = 0; i < prayers.length - 1; i++) {
+            if (currentTime >= prayers[i].time && currentTime < prayers[i + 1].time) {
+                return `${prayers[i].name} - ${prayers[i].time}`;
+            }
+        }
+
+        return `${prayers[prayers.length - 1].name} - ${prayers[prayers.length - 1].time}`; // Default to last prayer if none match
+    };
+
+    if (isLoading) {
+        return <div className="loading">Loading prayer times...</div>;
+    }
+
+    if (error) {
+        return <div className="error">Error: {error}</div>;
+    }
+
+    // Determine the current prayer time and highlight it
+    const currentPrayerInfo = prayerTimes ? getCurrentPrayer() : 'Loading...';
+
+    return (
+        <div className="prayer-times-container">
+            <h1>Prayer Times in {prayerTimes.attributes.CityName}</h1>
+            <div className="current-prayer-time">
+                {currentPrayerInfo}
+            </div>
+            <ul className="month-tabs clearfix">
+                {/* Generate month tabs */}
+                <li><a href="#january" className="active">Январь</a></li>
+                {/* ... other months */}
+            </ul>
+            <div className="monthly-prayer-times">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Prayer</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {Object.entries(prayerTimes.praytimes).map(([key, value]) => (
+                        <tr key={key} className={currentPrayerInfo.startsWith(key) ? 'active-time' : ''}>
+                            <td>{key}</td>
+                            <td>{value}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
-};
+}
 
 export default PrayerTimesPage;

@@ -14,6 +14,8 @@ import Reg from "./components/reg/Reg";
 import Products from "./components/products/products";
 import Product_info from "./components/product_info/product_info";
 import Services from "./services/services";
+import HigherFooter from "./components/higher_footer/HigherFooter";
+
 
 const token=localStorage.getItem("token")
 const services=new Services()
@@ -37,6 +39,7 @@ const App = () => {
                 </Routes>
             </div>
             <Footer/>
+            <HigherFooter/>
         </Router>
     );
 };
