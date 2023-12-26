@@ -5,19 +5,50 @@ import star from "./image 3 (1).png"
 import hz from "./hz.png"
 import image_one from "./image 1.png"
 import star_two from "./star 2.png"
+import { YMaps, Map,Placemark,Panorama} from '@pbe/react-yandex-maps';
+
+
 function Source_mechit(){
+
+
     return(
         <div className={"Sourceaa-mechit"}>
+            <YMaps>
+                <div>
+
+                    <Map defaultState={{ center: [43.235151848798054, 76.90987228082611], zoom: 9 ,controls: ["zoomControl", "fullscreenControl"],}} style={{ width:"100%",height:"450px"}}
+                         modules={["control.ZoomControl", "control.FullscreenControl"]}>
+                        <Placemark geometry={[43.235151848798054, 76.90987228082611]} />
+                    </Map>
+
+                </div>
+            </YMaps>
+
             <h2>Поиск мечети</h2>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d92983.42626009707!2d76.890112!3d43.2570368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2skz!4v1701840440219!5m2!1sru!2skz"
-                width="100%"
-                height="450"
-                style={{border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <div style={{ position: 'relative', overflow: 'hidden' }}>
+                <a
+                    href="https://yandex.ru/maps/162/almaty/?utm_medium=mapframe&utm_source=maps"
+                    style={{ color: '#eee', fontSize: '12px', position: 'absolute', top: '0px' }}
+                >
+                    Алматы
+                </a>
+                <a
+                    href="https://yandex.ru/maps/162/almaty/?ll=76.945465%2C43.238293&utm_medium=mapframe&utm_source=maps&z=12"
+                    style={{ color: '#eee', fontSize: '12px', position: 'absolute', top: '14px' }}
+                >
+                    Алматы — Яндекс Карты
+                </a>
+                <iframe
+                    title="Yandex Map"
+                    src="https://yandex.ru/map-widget/v1/?ll=76.945465%2C43.238293&z=12"
+                    width="100%"
+                    height="450"
+                    frameBorder="1"
+                    allowFullScreen
+                    style={{ position: 'relative' }}
+                ></iframe>
+            </div>
+
             <div className={"map_result_wrapp"}>
                 <div className={"map_result"}>
                     <p>Адрес: 935902, Алматы, Казахстан, ул. Ташкетский тракт 80</p>

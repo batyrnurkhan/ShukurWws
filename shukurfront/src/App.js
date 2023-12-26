@@ -14,6 +14,7 @@ import Reg from "./components/reg/Reg";
 import Products from "./components/products/products";
 import Product_info from "./components/product_info/product_info";
 import Services from "./services/services";
+import Post from "./components/post/post";
 
 const token=localStorage.getItem("token")
 const services=new Services()
@@ -28,6 +29,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/blog" element={<Post />}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/profile" element={<User_Profile authToken={token}/>}/>
                     <Route path="/prayer-times" element={<PrayerTimesPage/>}/>
