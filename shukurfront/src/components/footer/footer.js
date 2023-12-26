@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import logo from "../menu/Logo.svg";
 import "./footer.scss";
 
 function Footer() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [searchResults, setSearchResults] = useState({ products: [], blog_posts: [] });
     const [searchQuery, setSearchQuery] = useState('');
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (searchQuery.length > 0) {
@@ -16,6 +17,12 @@ function Footer() {
             setSearchResults({ products: [], blog_posts: [] });
         }
     }, [searchQuery]);
+
+    useEffect(() => {
+        // Reset search when the location changes
+        setSearchQuery('');
+        setSearchResults({ products: [], blog_posts: [] });
+    }, [location]);
 
     const fetchSearchResults = async () => {
         try {
@@ -27,7 +34,8 @@ function Footer() {
     };
 
     const handleProductClick = (productId) => {
-    window.scrollTo(0, 0); // Add this line to scroll to the top
+    window.scrollTo(0, 0);
+    setSearchQuery(''); // Reset the search query
     navigate(`/reviews/${productId}`);
 };
 
