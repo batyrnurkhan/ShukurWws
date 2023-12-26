@@ -24,12 +24,12 @@ class PrayerTimesView(APIView):
 def search(request):
     query = request.GET.get('query', '')
 
-    # Query for Blog Posts
-    blog_posts = BlogPost.objects.filter(title__icontains=query)
+    # Query for Blog Posts that start with the query
+    blog_posts = BlogPost.objects.filter(title__istartswith=query)
     blog_post_serializer = BlogPostSerializer(blog_posts, many=True)
 
-    # Query for Products
-    products = Product.objects.filter(name__icontains=query)
+    # Query for Products that start with the query
+    products = Product.objects.filter(name__istartswith=query)
     product_serializer = ProductSerializer(products, many=True)
 
     # Combine results
