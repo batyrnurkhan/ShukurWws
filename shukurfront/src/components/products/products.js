@@ -31,7 +31,8 @@ function Products({services}){
 
         services.GetResource("api/products/frequently_viewed")
             .then(res=>{
-                if(res[0].content){
+                console.log(res[0])
+                if(res[0]){
                     setBlogs(res[0].content)
                 }
             })
