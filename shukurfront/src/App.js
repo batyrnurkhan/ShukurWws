@@ -15,6 +15,7 @@ import Products from "./components/products/products";
 import Product_info from "./components/product_info/product_info";
 import Services from "./services/services";
 import Post from "./components/post/post";
+import Higher_footer from "./components/higher_footer/higher_footer";
 
 const token=localStorage.getItem("token")
 const services=new Services()
@@ -38,7 +39,13 @@ const App = () => {
                     <Route path={"/product-search"} element={<Products services={services} />}/>
                 </Routes>
             </div>
-            <Footer/>
+            {document.location.href === "http://localhost:3000/" ?<Footer/>:
+                (<div>
+                    <Higher_footer services={services}/>
+                <Footer />
+                </div>)
+            }
+
         </Router>
     );
 };
