@@ -10,7 +10,8 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 
 
-function User_Profile({ authToken }){
+
+function User_Profile({ authToken,services }){
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
@@ -30,6 +31,7 @@ function User_Profile({ authToken }){
     }, [authToken]);
     const Log_auth=async ()=>{
         console.log("logauth")
+
         await fetch(`http://127.0.0.1:8000/auth/token/logout/`, {
             method:"POST",
             headers:{
@@ -65,15 +67,15 @@ function User_Profile({ authToken }){
                                 </h3>
                                 <div className={"UP_brim"}>
                                     <img src={checked}/>
-                                    <div className={"UP_brim_text"}><span>E-mail:</span>{profile.email}<span
-                                        className={"UP_brim_text_margin"}></span></div>
+                                    <div className={"UP_brim_text"}><span>E-mail:</span><span
+                                        className={"UP_brim_text_margin"}>{profile.email}</span></div>
                                     <img src={pen} className={"UP_pen"}/>
                                     <div className={"UP_pen_text"}>Ред.</div>
                                 </div>
                                 <div className={"UP_brim"}>
                                     <img src={checked}/>
-                                    <div className={"UP_brim_text"}><span>Телефон:</span>{profile.phoneNumber}<span
-                                        className={"UP_brim_text_margin"}></span></div>
+                                    <div className={"UP_brim_text"}><span>Телефон:</span><span
+                                        className={"UP_brim_text_margin"}>{profile.phone_number}</span></div>
                                     <img src={pen} className={"UP_pen"}/>
                                     <div className={"UP_pen_text"}>Ред.</div>
                                 </div>

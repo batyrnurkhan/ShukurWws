@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -16,36 +16,34 @@ import Product_info from "./components/product_info/product_info";
 import Services from "./services/services";
 import Post from "./components/post/post";
 import Higher_footer from "./components/higher_footer/higher_footer";
+import Contacs from "./components/contacs/contacs";
+
 
 const token=localStorage.getItem("token")
 const services=new Services()
-//localStorage.clear()
+localStorage.clear()
 const App = () => {
-
 
     return (
         <Router>
+
             <div className="app">
-                <Menu/>
+                <Menu services={services}/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/blog" element={<Post/>}/>
                     <Route path="/register" element={<Register/>}/>
-                    <Route path="/profile" element={<User_Profile authToken={token}/>}/>
+                    <Route path="/profile" element={<User_Profile authToken={token} services={services}/>}/>
                     <Route path="/prayer-times" element={<PrayerTimesPage/>}/>
                     <Route path="/map" element={<Source_mechit services={services}/>}/>
                     <Route path={"/reviews/:id"} element={<Product_info services={services} />}/>
                     <Route path={"/product-search"} element={<Products services={services} />}/>
+                    <Route path={"/contacts"} element={<Contacs />} />
                 </Routes>
             </div>
-            {document.location.href === "http://localhost:3000/" ?<Footer/>:
-                (<div>
-                    <Higher_footer services={services}/>
-                <Footer />
-                </div>)
-            }
-
+            <Higher_footer />
+            <Footer />
         </Router>
     );
 };

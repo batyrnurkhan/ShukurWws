@@ -19,6 +19,21 @@ function Source_mechit({services}){
     }, []);
     return(
         <div className={"Sourceaa-mechit"}>
+            <h2>Поиск мечети</h2>
+            <div style={{ position: 'relative', overflow: 'hidden' }}>
+                <a
+                    href="https://yandex.ru/maps/162/almaty/?utm_medium=mapframe&utm_source=maps"
+                    style={{ color: '#eee', fontSize: '12px', position: 'absolute', top: '0px' }}
+                >
+                    Алматы
+                </a>
+                <a
+                    href="https://yandex.ru/maps/162/almaty/?ll=76.945465%2C43.238293&utm_medium=mapframe&utm_source=maps&z=12"
+                    style={{ color: '#eee', fontSize: '12px', position: 'absolute', top: '14px' }}
+                >
+                    Алматы — Яндекс Карты
+                </a>
+            </div>
             <YMaps>
                 <div>
 
@@ -49,30 +64,7 @@ function Source_mechit({services}){
                 </div>
             </YMaps>
 
-            <h2>Поиск мечети</h2>
-            <div style={{ position: 'relative', overflow: 'hidden' }}>
-                <a
-                    href="https://yandex.ru/maps/162/almaty/?utm_medium=mapframe&utm_source=maps"
-                    style={{ color: '#eee', fontSize: '12px', position: 'absolute', top: '0px' }}
-                >
-                    Алматы
-                </a>
-                <a
-                    href="https://yandex.ru/maps/162/almaty/?ll=76.945465%2C43.238293&utm_medium=mapframe&utm_source=maps&z=12"
-                    style={{ color: '#eee', fontSize: '12px', position: 'absolute', top: '14px' }}
-                >
-                    Алматы — Яндекс Карты
-                </a>
-                <iframe
-                    title="Yandex Map"
-                    src="https://yandex.ru/map-widget/v1/?ll=76.945465%2C43.238293&z=12"
-                    width="100%"
-                    height="450"
-                    frameBorder="1"
-                    allowFullScreen
-                    style={{ position: 'relative' }}
-                ></iframe>
-            </div>
+
 
             <div className={"map_result_wrapp"}>
                 <div className={"map_result"}>

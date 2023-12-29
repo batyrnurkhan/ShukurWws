@@ -2,7 +2,7 @@ import vector from "./Vector.svg"
 import "./Reg.css"
 import {useState} from "react";
 
-function Reg(){
+function Reg({services}){
     const [login,loginSet]=useState()
     const [full_name,full_nameSet]=useState()
     const [email,emailSet]=useState()
@@ -17,12 +17,8 @@ function Reg(){
     }
     const PostUser=async (user)=> {
         if (password === password_r) {
-            return await fetch(' http://127.0.0.1:8000/auth/users/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
+            services.SendResource("auth/users/",
+                JSON.stringify({
                     username: login,
                     email: email,
                     password: password,
@@ -30,34 +26,14 @@ function Reg(){
                     phone_number: number,
                     adres: null,
                     avatar: null
-                })
-            })
+                }))
                 .then(data=>{
-                    if(data.status !== 201){
-                        erorSet("Ошибка")
-                    }
-                    else{
-                        fetch("http://127.0.0.1:8000/auth/token/login/",{
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body:JSON.stringify({
+                        services.SendResource("auth/token/login/",
+                            JSON.stringify({
                                 password: password,
                                 username: login
                             })
-
-                        })
-                            .then(data=>{
-                                if(data.status !== 200){
-                                    erorSet("Ошибка")
-                                    console.log("eror")
-                                }
-
-                                else{
-                                    return data.json()
-                                }
-                            })
+                            )
                             .then(res=>{
                                 console.log(res.auth_token)
                                 localStorage.setItem("token",res.auth_token)
@@ -65,7 +41,6 @@ function Reg(){
                             })
 
                         return data.json()
-                    }
                 })
                 .catch(eror=>{
                     erorSet(eror)

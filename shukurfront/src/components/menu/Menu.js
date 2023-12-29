@@ -9,7 +9,7 @@ import React, {useEffect, useState} from "react";
 import Auth from "../reg/auth";
 
 const  token=localStorage.getItem("token")
-function Menu() {
+function Menu({services}) {
 
     return (
         <div>
@@ -40,7 +40,7 @@ function Menu() {
                     <span className={"app_button"}><a href={"/"}>Cкачать приложение</a></span>
 
                     <div className={"menu_button"}>
-                        {token === "" || token === null || token === undefined ? (<div className={"pain"}><Auth /></div>) :
+                        {token === "" || token === null || token === undefined ? (<div className={"pain"}><Auth services={services} /></div>) :
                             (<Link to="/profile">
                                 <img src={user} className={"menu_bt_img"}/>
                                 <div>Личный кабинет</div>

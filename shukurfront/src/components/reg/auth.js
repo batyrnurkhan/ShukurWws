@@ -2,7 +2,7 @@ import vector from "./Vector.svg";
 import "./Reg.css"
 import React, {useState} from "react";
 import Reg from "./Reg";
-function Auth(){
+function Auth({services}){
     const [password,passwordSet]=useState()
     const [login,loginSet]=useState()
     const [eror,erorSet]=useState()
@@ -12,27 +12,12 @@ function Auth(){
         log_tSet(!log_t)
     }
     const auth=()=>{
-        fetch("http://127.0.0.1:8000/auth/token/login/",{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({
+        services.SendResource('auth/token/login/',
+            JSON.stringify({
                 password: password,
                 username: login
             })
-
-        })
-            .then(data=>{
-                if(data.status !== 200){
-                    erorSet("Ошибка")
-                    console.log("eror")
-                }
-
-                else{
-                    return data.json()
-                }
-            })
+        )
             .then(res=>{
                 console.log(res.auth_token)
                 localStorage.setItem("token",res.auth_token)
@@ -53,7 +38,7 @@ function Auth(){
                                 <input placeholder={"Пароль"} type={"password"} id={"password"}
                                        onChange={e => passwordSet(e.target.value)}/>
                                 <button type={"button"} onClick={()=>auth()}>Войти</button>
-                                <h3><Reg /></h3>
+                                <h3><Reg services={services}/></h3>
                             </form>
                             <img src={vector} onClick={() => LogSubmit()}/>
                         </div>
