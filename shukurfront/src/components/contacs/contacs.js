@@ -1,6 +1,6 @@
 import "./contacs.css"
 import watsapp from "./Vector.svg"
-import map from "./Rectangle 93.png"
+import {Map, Placemark, YMaps} from "@pbe/react-yandex-maps";
 function Contacs(){
     return(
         <div className={"contacs"}>
@@ -30,7 +30,23 @@ function Contacs(){
                     </div>
                 </div>
                 <div className={"col-lg-6"}>
-                    <img src={map} className={"contacs_map"}/>
+                    <YMaps>
+                        <div>
+
+                            <Map defaultState={{ center: [43.235151848798054, 76.90987228082611], zoom: 9 ,controls: ["zoomControl", "fullscreenControl"],}} style={{ width:"570px",height:"320px"}}
+                                 modules={["control.ZoomControl", "control.FullscreenControl"]}>
+                                <Placemark geometry={[43.23746958964736, 76.90894275419565]}
+                                           modules={["geoObject.addon.balloon", 'geoObject.addon.hint']}
+                                           options={
+                                               {
+                                                   iconColor: 'green', // цвет иконки, можно также задавать в hex
+                                               }
+                                           }
+                                />
+                            </Map>
+
+                        </div>
+                    </YMaps>
                 </div>
             </div>
         </div>
