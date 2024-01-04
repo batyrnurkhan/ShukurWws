@@ -16,8 +16,7 @@ function Menu({services}) {
         <div className={"nav_back"}>
             <div className={"base"}>
                 <nav className={"header_nav"}>
-                    <div className={"slogan"}>Теперь поиск продуктов стал еще легче</div>
-                    <div>
+                    <div className={"slogan"}>Теперь поиск продуктов стал еще легче !</div>
                         <ul>
                             <Link to="/" ><li id={"unique_link"}>Главная</li></Link>
                             <Link to="/prayer-times" ><li>Время намаза</li></Link>
@@ -26,7 +25,6 @@ function Menu({services}) {
                             <Link to="/blog" ><li>Блог</li></Link>
                             <Link to="/map" ><li>Карта</li></Link>
                         </ul>
-                    </div>
                 </nav>
 
 
@@ -35,7 +33,10 @@ function Menu({services}) {
         <div className={"menu_back"}>
 
             <div className={"custom_base"}>
-                <span><Link to={"/"}><img src={logo} className={"logo"}/><span className={"logo_text"}>Shukur</span></Link></span>
+                    <Link to={"/"} className="logo-flex">
+                        <img src={logo} className={"logo"}/>
+                        <span className={"logo_text"}>Shukur</span>
+                    </Link>
                 <span className={"menu_bt_div"}>
                     <span className={"app_button"}><a href={"/"}>Cкачать приложение</a></span>
 

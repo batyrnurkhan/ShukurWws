@@ -29,7 +29,8 @@ function User_Profile({ authToken,services }){
 
         fetchProfile();
     }, [authToken]);
-    const Log_auth=async ()=>{
+
+    const Log_auth = async ()=>{
         console.log("logauth")
 
         await fetch(`http://127.0.0.1:8000/auth/token/logout/`, {
@@ -49,16 +50,16 @@ function User_Profile({ authToken,services }){
     }
     return(
         <div>
-            {profile?(
+            {profile ? (
                 <div>
-                    <Link to={"/"} className={"logauth"}><h1 onClick={()=>Log_auth()} >Выйти</h1></Link>
+                    <Link to={"/"} className={"logauth"}><h1 onClick={()=>Log_auth()} >Выйти </h1></Link>
                     <div className={"User_profile_header"}>
                         <h2 className={"UP_h2"}>Личный кабинет</h2>
                     </div>
                     <div className={"User_profile"}>
 
                         <div className={"row"}>
-                            <div className={"col-lg-4 UP_1_container"}>{profile.avatar === null ?<img src={photo_2}/>:<img src={profile.avatar}/>}</div>
+                            <div className={"col-lg-4 UP_1_container"}>{profile.avatar === null ? <img src={photo_2}/> : <img src={profile.avatar}/>}</div>
                             <div className={"col-lg-8 UP_2_container"}>
                                 <h3 className={"UP_brim"}>
                                     {profile.username}
