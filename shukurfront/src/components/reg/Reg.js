@@ -1,20 +1,23 @@
 import vector from "./Vector.svg"
 import "./Reg.css"
 import {useState} from "react";
+import 'react-phone-number-input/style.css'
+import Input from 'react-phone-number-input/input'
 
 function Reg(){
-    const [login,loginSet]=useState()
-    const [full_name,full_nameSet]=useState()
-    const [email,emailSet]=useState()
-    const [number,numberSet]=useState()
-    const [password,passwordSet]=useState()
-    const [password_r,password_r_Set]=useState()
-    const [eror,erorSet]=useState("")
+    const [login, loginSet] = useState()
+    const [full_name, full_nameSet] = useState()
+    const [email, emailSet] = useState()
+    const [number, setNumber] = useState('')
+    const [password, passwordSet] = useState()
+    const [password_r, password_r_Set] = useState()
+    const [eror, erorSet] = useState("")
+    const [reg_t,reg_tSet] = useState(false);
 
-    const [reg_t,reg_tSet]=useState(false);
     const RegSubmit=()=>{
         reg_tSet(!reg_t)
     }
+   
     const PostUser=async (user)=> {
         if (password === password_r) {
             return await fetch(' http://127.0.0.1:8000/auth/users/', {
@@ -76,7 +79,7 @@ function Reg(){
         }
     }
     return(
-        <diV>
+        <div>
             {reg_t ? (<div className={"reg"}>
                 <div className={"reg_card"}>
                     <h2>Регистрация</h2>
@@ -84,7 +87,7 @@ function Reg(){
                         <input placeholder={"Логин"} id={"login"} onChange={e=>loginSet(e.target.value)}/>
                         <input placeholder={"ФИО"} id={"Full_name"} onChange={e=>full_nameSet(e.target.value)}/>
                         <input placeholder={"E-mail"} type={"email"} id={"email"} onChange={e=>emailSet(e.target.value)}/>
-                        <input placeholder={"Телефон"} type={"number"} id={"number"} onChange={e=>numberSet(e.target.value)}/>
+                        <Input placeholder="+7XXXXXXXX" value={number} onChange={setNumber} />
                         <input placeholder={"Пароль"} type={"password"} id={"password"} onChange={e=>passwordSet(e.target.value)}/>
                         <input placeholder={"Повторите пароль"} type={"password"} id={"password_review"} onChange={e=>password_r_Set(e.target.value)}/>
                         <button type={"button"} onClick={()=>PostUser()}>Зарегестрировать</button>
@@ -94,7 +97,7 @@ function Reg(){
                 </div>
             </div>):
                 (<h3 onClick={()=>RegSubmit()}>Регистрация</h3>)}
-        </diV>
+        </div>
     )
 
 }

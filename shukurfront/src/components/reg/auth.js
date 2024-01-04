@@ -2,10 +2,11 @@ import vector from "./Vector.svg";
 import "./Reg.css"
 import React, {useState} from "react";
 import Reg from "./Reg";
+
 function Auth(){
     const [password,passwordSet]=useState()
     const [login,loginSet]=useState()
-    const [eror,erorSet]=useState()
+    const [error,erorSet]=useState()
 
     const [log_t,log_tSet]=useState(false);
     const LogSubmit=()=>{
