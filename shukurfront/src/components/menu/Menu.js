@@ -16,7 +16,7 @@ function Menu() {
         <div className={"nav_back"}>
             <div className={"base"}>
                 <nav className={"header_nav"}>
-                    <div className={"slogan"}>Теперь поиск продуктов стал еще легче</div>
+                    <div className={"slogan"}>Теперь поиск продуктов стал еще легче !</div>
                         <ul>
                             <Link to="/" ><li id={"unique_link"}>Главная</li></Link>
                             <Link to="/prayer-times" ><li>Время намаза</li></Link>
