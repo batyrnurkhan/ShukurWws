@@ -87,7 +87,7 @@ function Reg(){
                             <input placeholder={"Логин"} id={"login"} onChange={e=>loginSet(e.target.value)}/>
                             <input placeholder={"ФИО"} id={"Full_name"} onChange={e=>full_nameSet(e.target.value)}/>
                             <input placeholder={"E-mail"} type={"email"} id={"email"} onChange={e=>emailSet(e.target.value)}/>
-                            <Input placeholder="+7XXXXXXXX" value={number} onChange={setNumber}  limitMaxLength={true} maxLength={11}/>
+                            <Input placeholder="+7XXXXXXXX" value={number} onChange={setNumber}  limitMaxLength={true} maxLength={15}/>
                             <input placeholder={"Пароль"} type={"password"} id={"password"} onChange={e=>passwordSet(e.target.value)}/>
                             <input placeholder={"Повторите пароль"} type={"password"} id={"password_review"} onChange={e=>password_r_Set(e.target.value)}/>
                             <button type={"button"} onClick={()=>PostUser()}>Зарегестрировать</button>
