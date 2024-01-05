@@ -1,4 +1,4 @@
-.products{
+ц.products{
     max-width: 1600px;
     margin: 0 auto;
 }
@@ -42,17 +42,23 @@
     width: 72px;
     height: 133px;
 }
-.pr_card{
+.pr_card {
     padding: 25px 0 0 0;
     border-radius: 10px;
     background: #FFF;
     box-shadow: 0px 9px 18px 7px rgba(0, 0, 0, 0.17);
-    width: 50%;
+    flex: 0 0 calc((100% - 3 * 30px) / 4);
     margin-bottom: 100px;
-    margin-right: 5%;
+
 }
-.product_row{
+.product_row {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 30px;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1600px;
 }
 .pr_card_bolt{
     font-size: 16px;
@@ -76,20 +82,25 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 162.9%; /* 26.064px */
+    line-height: 162.9%;
     text-transform: uppercase;
     margin-right: 15px;
 }
-.product_banner{
-    justify-content: space-between;
+.product_banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #9BCB9A;
     width: 94%;
-    margin-left: 5px;
+    margin: 0 auto;
     margin-bottom: 85px;
 }
-.pr_banner_text{
-    margin-left: 135px;
+.pr_card:nth-child(4n) {
+    margin-right: 0;
+}
+.pr_banner_text {
     margin-bottom: 40px;
+
 }
 .product_banner_a{
     color: #000;
