@@ -63,16 +63,16 @@ function Footer() {
                             </div>
                             <div>
                                 <ul className={"footer_nav_ul"}>
-                                    <li><a href="/">Заведение</a></li>
+                                    <li><a href="/map">Заведение</a></li>
                                     <li><a href="/add-product">Добавить продукт</a></li>
-                                    <li><a href="/account">Личный кабинет</a></li>
+                                    <li><a href="/profile">Личный кабинет</a></li>
                                 </ul>
                             </div>
                             <div>
                                 <ul className={"footer_nav_ul"}>
-                                    <li><a href="/products">продукты</a></li>
+                                    <li><a href="/product-search">продукты</a></li>
                                     <li><a href="/blog">блог</a></li>
-                                    <li><a href="/view-products">Просмотр продуктов</a></li>
+                                    <li><a href="/product-search">Просмотр продуктов</a></li>
                                 </ul>
                             </div>
                         </div>

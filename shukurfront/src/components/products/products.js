@@ -121,7 +121,7 @@ function Products({services}){
                 </div>
 
                     <section className={"blog-section Frequently_viewed"}>
-                        <h2>Новости и статьи</h2>
+                        <h2>Часто просматривают</h2>
                         <div className="carousel-container">
                             <button onClick={() => moveCard('prev')} className="arrow-prev">
                                 <img src={arrowBack} alt="Previous"/>
