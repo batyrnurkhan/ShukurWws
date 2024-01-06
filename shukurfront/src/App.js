@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
@@ -19,6 +19,7 @@ import Higher_footer from "./components/higher_footer/higher_footer";
 import Contacs from "./components/contacs/contacs";
 
 
+
 const token=localStorage.getItem("token")
 const services=new Services()
 localStorage.clear()
@@ -26,7 +27,6 @@ const App = () => {
 
     return (
         <Router>
-
             <div className="app">
                 <Menu services={services}/>
                 <Routes>
@@ -42,8 +42,8 @@ const App = () => {
                     <Route path={"/contacts"} element={<Contacs />} />
                 </Routes>
             </div>
-            <Higher_footer />
-            <Footer />
+            <Higher_footer/>
+            <Footer/>
         </Router>
     );
 };
