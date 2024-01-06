@@ -17,6 +17,7 @@ import Services from "./services/services";
 import Post from "./components/post/post";
 import Higher_footer from "./components/higher_footer/higher_footer";
 import Contacs from "./components/contacs/contacs";
+import Blog from "./components/blog_id/blog";
 
 
 
@@ -33,6 +34,7 @@ const App = () => {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/blog" element={<Post/>}/>
+                    <Route path="/blog/:id" element={<Blog services={services}/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/profile" element={<User_Profile authToken={token} services={services}/>}/>
                     <Route path="/prayer-times" element={<PrayerTimesPage/>}/>

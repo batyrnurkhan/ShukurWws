@@ -80,11 +80,13 @@ function Home(){
                             .concat(blogs.slice(0, Math.max(0, activeIndex + 4 - blogs.length)))
                             .map((blog, index) => (
                                 <div className="blog-card" key={index}>
-                                    <img src={blog.image1} alt={blog.title}/>
+                                    <Link to={`/blog/${blog.id}`}  className={"blog_card_link"}>
+                                    <img src={blog.blog_img} alt={blog.title}/>
                                     <div className="card-content">
                                         <h3>{blog.title}</h3>
                                         <p>{new Date(blog.created_at).toLocaleDateString('ru-RU')}</p>
                                     </div>
+                                    </Link>
                                 </div>
                             ))}
                     </div>
