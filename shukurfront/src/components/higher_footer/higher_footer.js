@@ -34,19 +34,18 @@ function Higher_footer({services}){
 
 
     const review_send=()=>{
-        fetch("http://127.0.0.1:8000/api/review",{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify({
-                name: name,
-                number: number,
-                product_name: product_name,
-                coments: comment
-            })
-
-        })
+        fetch("http://127.0.0.1:8000/api/review", {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+    name: name,
+    number: number,
+    product_name: product_name,
+    coments: comment  // Corrected field name
+})
+})
 
         /*services.SendResource("api/review",JSON.stringify({
             name: name,
