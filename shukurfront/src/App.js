@@ -18,6 +18,7 @@ import Post from "./components/post/post";
 import Higher_footer from "./components/higher_footer/higher_footer";
 import Contacs from "./components/contacs/contacs";
 import Blog from "./components/blog_id/blog";
+import Product_categories from "./components/Product_categories/Product_categories";
 
 
 
@@ -41,6 +42,7 @@ const App = () => {
                     <Route path="/map" element={<Source_mechit services={services}/>}/>
                     <Route path={"/reviews/:id"} element={<Product_info services={services} />}/>
                     <Route path={"/product-search"} element={<Products services={services} />}/>
+                    <Route path={"/product-search/:slug"} element={<Product_categories services={services} />}/>
                     <Route path={"/contacts"} element={<Contacs />} />
                 </Routes>
             </div>

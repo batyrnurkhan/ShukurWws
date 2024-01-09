@@ -35,12 +35,26 @@ class Search(ListView):
     def get_queryset(self):
         return Product.objects.filter()
 
-class CategoryListCreateView(generics.ListAPIView):
+class CategoryListAPIView(generics.ListAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
         print(self.kwargs['slug'])
         return Product.objects.filter(category__slug=self.kwargs['slug'])
+
+class CategoryListAPIView_certifided(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        print(self.kwargs['slug'])
+        return Product.objects.filter(category__slug=self.kwargs['slug']).filter(certified=True)
+
+class CategoryListAPIView_not_certifided(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        print(self.kwargs['slug'])
+        return Product.objects.filter(category__slug=self.kwargs['slug']).filter(certified=False)
 
 class ProductListCreateView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer

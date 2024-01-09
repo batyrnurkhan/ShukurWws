@@ -1,8 +1,8 @@
-import "./products.css"
-import product from "./pngegg (36) 1.png"
-import banner from "./image 2.png"
-import left from "./left.svg"
-import right from "./right.svg"
+import "../products/products.css"
+import product from "../products/pngegg (36) 1.png"
+import banner from "../products/image 2.png"
+import left from "../products/left.svg"
+import right from "../products/right.svg"
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {renderToStaticMarkup} from "react-dom/server";
@@ -10,14 +10,14 @@ import arrowBack from "../HomePageStyle/arrowback.png";
 import arrowNext from "../HomePageStyle/arrownext.png";
 
 
-function Products({services}){
+function Product_categories({services}){
     const [product_list,product_listSet]=useState()
     const [product_list_n,product_list_nSet]=useState()
 
     const [blogs, setBlogs] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0); // To keep track of the current active card
 
-
+    const { slug } = useParams();
     useEffect(()=>{
         services.GetResource(`api/products/certify`)
             .then(res=>{
@@ -25,7 +25,7 @@ function Products({services}){
 
             })
 
-        services.GetResource(`api/products/not_certify`)
+        services.GetResource(`api/products/categories/${slug}/not_certify`)
             .then(res=>{
                 console.log(res)
                 product_list_nSet(res)
@@ -62,48 +62,48 @@ function Products({services}){
     return(
         <div>
             {product_list && product_list_n && blogs ? (<div className={"products"}>
-                <h2 className={"pr_h2"}>Продукты</h2>
-                <ul className={"pr_bar"}>
-                    <li><a href={"/product-search"}>Все товары</a></li>
-                    <li><a href={"/product-search/hammock"}>Гамаки</a></li>
-                    <li><a href={"/product-search/case"}>Чехлы</a></li>
-                    <li><a href={"/product-search/fastener"}>Крепеж</a></li>
-                </ul>
-                <h2 className={"pr_h2_two"}>Халяльные продукты</h2>
+                    <h2 className={"pr_h2"}>Продукты</h2>
+                    <ul className={"pr_bar"}>
+                        <li><a href={"/product-search"}>Все товары</a></li>
+                        <li><a href={"/product-search/hammock"}>Гамаки</a></li>
+                        <li><a href={"/product-search/case"}>Чехлы</a></li>
+                        <li><a href={"/product-search/fastener"}>Крепеж</a></li>
+                    </ul>
+                    <h2 className={"pr_h2_two"}>Халяльные продукты</h2>
 
-                <div className={"product_row row"}>
-
-                    {product_list.map(res=>{
-                        return (
-                            <div className={"col-lg-2 pr_card"}>
-                                <Link to={`/reviews/${res.id}`} className={"not_link"}>
-                                    <div className={"img_layer"}><img src={res.img}/></div>
-                                    <div className={"text_layer"}>
-                                        <p className={"pr_card_bolt"}>{res.name}</p>
-                                        <p className={"pr_card_text"}>{res.details}</p>
-                                        <p className={"pr_card_label"}>Халяльный</p>
-                                    </div>
-                                </Link>
-                            </div>
-
-                        )
-                    })}
-                </div>
-                <div className={"product_banner row"}>
-                    <div className={"col-6 pr_banner_text"}>
-                        <h2>Не нашел нужный продукт?</h2>
-                        <p>В таком случае заполни заявку и мы добавим его в наш список</p>
-                        <a href={"/"}>Оставить заявку</a>
-                    </div>
-                    <div className={"col-4 pr_banner_img"}>
-                        <img src={banner}/>
-                    </div>
-                </div>
-                <div className={"Not_halal"}>
-                    <h2>Не халяльные продукты</h2>
                     <div className={"product_row row"}>
-                        {product_list_n.map(res=>{
+
+                        {product_list.map(res=>{
                             return (
+                                <div className={"col-lg-2 pr_card"}>
+                                    <Link to={`/reviews/${res.id}`} className={"not_link"}>
+                                        <div className={"img_layer"}><img src={res.img}/></div>
+                                        <div className={"text_layer"}>
+                                            <p className={"pr_card_bolt"}>{res.name}</p>
+                                            <p className={"pr_card_text"}>{res.details}</p>
+                                            <p className={"pr_card_label"}>Халяльный</p>
+                                        </div>
+                                    </Link>
+                                </div>
+
+                            )
+                        })}
+                    </div>
+                    <div className={"product_banner row"}>
+                        <div className={"col-6 pr_banner_text"}>
+                            <h2>Не нашел нужный продукт?</h2>
+                            <p>В таком случае заполни заявку и мы добавим его в наш список</p>
+                            <a href={"/"}>Оставить заявку</a>
+                        </div>
+                        <div className={"col-4 pr_banner_img"}>
+                            <img src={banner}/>
+                        </div>
+                    </div>
+                    <div className={"Not_halal"}>
+                        <h2>Не халяльные продукты</h2>
+                        <div className={"product_row row"}>
+                            {product_list_n.map(res=>{
+                                return (
 
                                     <div className={"col-lg-2 pr_card "}>
                                         <Link to={`/reviews/${res.id}`} className={"not_link"}>
@@ -116,11 +116,11 @@ function Products({services}){
                                         </Link>
                                     </div>
 
-                            )
-                        })}
-                    </div>
+                                )
+                            })}
+                        </div>
 
-                </div>
+                    </div>
 
                     <section className={"blog-section Frequently_viewed"}>
                         <h2>Часто просматривают</h2>
@@ -167,10 +167,10 @@ function Products({services}){
                             {renderDots()}
                         </div>
                     </section>
-            </div>):
-            <h1>loading...</h1>}
+                </div>):
+                <h1>loading...</h1>}
         </div>
     )
 }
 
-export default Products
+export default Product_categories

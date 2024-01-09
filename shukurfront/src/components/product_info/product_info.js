@@ -24,9 +24,9 @@ function Product_info({ services }){
                         <img src={product.img}/>
                     </div>
                     <div className={"pr_inf_mini_img"}>
-                        <img src={product.img}/>
-                        <img src={product.img}/>
-                        <img src={product.img}/>
+                        <img src={product.img_2}/>
+                        <img src={product.img_3}/>
+                        <img src={product.img_4}/>
                     </div>
                 </div>
                 <div className={"col-lg-7 pr_inf_2"}>
