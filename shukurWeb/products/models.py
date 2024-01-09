@@ -2,15 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from accounts.models import CustomUser
 class Category(models.Model):
+    slug=models.SlugField()
     name = models.CharField(max_length=100)
-
     def __str__(self):
-        return self.name
+        return self.slug
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
     certified = models.BooleanField(default=False)
     img=models.ImageField(upload_to="photos/%Y/%m/%d/")
+    img_2 = models.ImageField(upload_to="photos/%Y/%m/%d/")
+    img_3 = models.ImageField(upload_to="photos/%Y/%m/%d/")
+    img_4 = models.ImageField(upload_to="photos/%Y/%m/%d/")
     rating = models.FloatField(default=0.0)
     details = models.TextField()
     ingredients = models.TextField()

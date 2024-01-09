@@ -35,9 +35,12 @@ class Search(ListView):
     def get_queryset(self):
         return Product.objects.filter()
 
-class CategoryListCreateView(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+class CategoryListCreateView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        print(self.kwargs['slug'])
+        return Product.objects.filter(category__slug=self.kwargs['slug'])
 
 class ProductListCreateView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer

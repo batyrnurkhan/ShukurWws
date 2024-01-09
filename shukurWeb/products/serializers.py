@@ -5,7 +5,7 @@ from .models import Product, Category, ProductRequest, ProductRating, Frequently
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name']
+        fields = "__all__"
 
 
 
@@ -14,7 +14,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'certified', 'rating', 'details', 'ingredients', 'category', 'parameter', 'img', 'category_name']
+        fields = "__all__"
 
     def get_category_name(self, obj):
         return obj.category.name
