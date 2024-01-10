@@ -4,7 +4,7 @@ import banner from "../products/image 2.png"
 import left from "../products/left.svg"
 import right from "../products/right.svg"
 import React, {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link, NavLink, useParams, useNavigate} from "react-router-dom";
 import {renderToStaticMarkup} from "react-dom/server";
 import arrowBack from "../HomePageStyle/arrowback.png";
 import arrowNext from "../HomePageStyle/arrownext.png";
@@ -18,8 +18,9 @@ function Product_categories({services}){
     const [activeIndex, setActiveIndex] = useState(0); // To keep track of the current active card
 
     const { slug } = useParams();
+    const navigate = useNavigate();
     useEffect(()=>{
-        services.GetResource(`api/products/certify`)
+        services.GetResource(`api/products/categories/${slug}/certify`)
             .then(res=>{
                 product_listSet(res)
 
@@ -33,14 +34,15 @@ function Product_categories({services}){
 
         services.GetResource("api/products/frequently_viewed")
             .then(res=>{
-                console.log(res[0])
-                if(res[0]){
-                    setBlogs(res[0].content)
-                }
-            })
+            console.log(res[0])
+            if(res[0]){
+                setBlogs(res[0].content)
+            }
+        })
 
+        navigate(`/product-search/${slug}`, { replace: true });
+    },[slug, navigate])
 
-    },[])
     const moveCard = (direction) => {
         setActiveIndex((current) => {
             // Calculate the new index based on direction and wrap around if needed
@@ -64,10 +66,10 @@ function Product_categories({services}){
             {product_list && product_list_n && blogs ? (<div className={"products"}>
                     <h2 className={"pr_h2"}>Продукты</h2>
                     <ul className={"pr_bar"}>
-                        <li><a href={"/product-search"}>Все товары</a></li>
-                        <li><a href={"/product-search/hammock"}>Гамаки</a></li>
-                        <li><a href={"/product-search/case"}>Чехлы</a></li>
-                        <li><a href={"/product-search/fastener"}>Крепеж</a></li>
+                        <li><NavLink to={"/product-search"} end className={"product_a"} >Все товары</NavLink></li>
+                        <li><NavLink to={"/product-search/juice"} className={"product_a"} >соки</NavLink></li>
+                        <li><NavLink to={"/product-search/footer"} className={"product_a"}  >еда</NavLink></li>
+                        <li><NavLink to={"/product-search/soda"} className={"product_a"} >гозировка</NavLink></li>
                     </ul>
                     <h2 className={"pr_h2_two"}>Халяльные продукты</h2>
 

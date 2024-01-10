@@ -14,11 +14,13 @@
     list-style: none;
     justify-content: center;
 }
-.pr_bar a{
+.product_a{
     text-decoration: none;
     margin-left: 34px;
     color: rgba(113, 113, 113, 1);
-
+}
+.product_a.active{
+    color: #00A859;
 }
 .pr_bar a:hover{
     color: #36873E;

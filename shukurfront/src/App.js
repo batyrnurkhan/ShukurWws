@@ -41,7 +41,7 @@ const App = () => {
                     <Route path="/prayer-times" element={<PrayerTimesPage/>}/>
                     <Route path="/map" element={<Source_mechit services={services}/>}/>
                     <Route path={"/reviews/:id"} element={<Product_info services={services} />}/>
-                    <Route path={"/product-search"} element={<Products services={services} />}/>
+                    <Route path={"/product-search"}  element={<Products services={services} />}/>
                     <Route path={"/product-search/:slug"} element={<Product_categories services={services} />}/>
                     <Route path={"/contacts"} element={<Contacs />} />
                 </Routes>
