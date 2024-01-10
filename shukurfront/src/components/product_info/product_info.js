@@ -3,30 +3,55 @@ import "./product_info.css"
 import "../products/products.css"
 import product2 from "../products/pngegg (36) 1.png";
 import banner from "./image 5.png";
+import vector from "./Vector.svg"
 import {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
 function Product_info({ services }){
     const { id } = useParams();
     const [product, productSet] = useState();
-
+    const [product_img_triger,product_img_trigerSet]=useState(false)
+    const [product_img,product_imgSet]=useState()
+    const [product_img_rep,product_img_repSet]=useState()
+    const [product_img_list,product_img_listSet]=useState()
     useEffect(() => {
         services.GetResource(`api/products/view/${id}`)
             .then(res => {
                 productSet(res);
+                product_img_listSet([res.img,res.img_2,res.img_3,res.img_4])
+                product_imgSet(res.img)
             })
     }, [id]);
+
+    const produc_img_func=(img)=>{
+        product_img_trigerSet(true)
+        product_imgSet(img)
+    }
+    const product_img_exit=()=>{
+        product_img_trigerSet(false)
+    }
     return(
-        <diV>
+        <div>
+            {product_img_triger ?(<div className={`product_triger`}>
+                <div className={"product_triger_vector"}>
+                    <img  src={vector} onClick={()=>product_img_exit()}/>
+                </div>
+                <img className={"product_img"} src={product_img}/>
+            </div>):(<div></div>)}
+
         {product ? (<div className={"product_info"}>
+
             <div className={"row"}>
                 <div className={"col-lg-5 pr_inf_1"}>
+                    {}
                     <div className={"pr_inf_1_1"}>
-                        <img src={product.img}/>
+                        <img src={product_img} onClick={()=>produc_img_func(product_img)}/>
                     </div>
                     <div className={"pr_inf_mini_img"}>
-                        <img src={product.img_2}/>
-                        <img src={product.img_3}/>
-                        <img src={product.img_4}/>
+                        {product_img_list.map(res=>{
+                            return(
+                                <img src={res} onClick={()=>produc_img_func(res)} key={id}/>
+                            )
+                        })}
                     </div>
                 </div>
                 <div className={"col-lg-7 pr_inf_2"}>
@@ -105,7 +130,7 @@ function Product_info({ services }){
             (<h1>loading...</h1>)}
 
 
-        </diV>
+        </div>
     )
 }
 export default Product_info
