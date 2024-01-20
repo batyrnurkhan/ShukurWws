@@ -19,6 +19,7 @@ import Higher_footer from "./components/higher_footer/higher_footer";
 import Contacs from "./components/contacs/contacs";
 import Blog from "./components/blog_id/blog";
 import Product_categories from "./components/Product_categories/Product_categories";
+import Activate_email from "./components/activate_email/activate_email";
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
                     <Route path={"/product-search"}  element={<Products services={services} />}/>
                     <Route path={"/product-search/:slug"} element={<Product_categories services={services} />}/>
                     <Route path={"/contacts"} element={<Contacs />} />
+                    <Route path={"activation/:uid/:token"} element={<Activate_email />} />
                 </Routes>
             </div>
             <Higher_footer/>

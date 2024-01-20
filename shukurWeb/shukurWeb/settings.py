@@ -127,9 +127,16 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL':True
 }
+EMAIL_HOST='smtp.mail.ru'
+EMAIL_PORT=465
+EMAIL_HOST_USER='kz_shukur@mail.ru'
+EMAIL_HOST_PASSWORD='qTsqjPzhVYUDPU0q7R89'
+EMAIL_USE_SSL=True
+DEFAULT_FROM_EMAIL="kz_shukur@mail.ru"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 AUTHENTICATION_BACKENDS = (

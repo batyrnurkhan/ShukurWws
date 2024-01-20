@@ -36,39 +36,10 @@ function Reg(){
                 })
             })
                 .then(data=>{
-                    if(data.status !== 201){
+                    if(data.status !== 201) {
                         erorSet("Ошибка")
                     }
-                    else{
-                        fetch("http://127.0.0.1:8000/auth/token/login/",{
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body:JSON.stringify({
-                                password: password,
-                                username: login
-                            })
-
-                        })
-                            .then(data=>{
-                                if(data.status !== 200){
-                                    erorSet("Ошибка")
-                                    console.log("eror")
-                                }
-
-                                else{
-                                    return data.json()
-                                }
-                            })
-                            .then(res=>{
-                                console.log(res.auth_token)
-                                localStorage.setItem("token",res.auth_token)
-                                document.location.reload()
-                            })
-
-                        return data.json()
-                    }
+                    else document.location.reload()
                 })
                 .catch(eror=>{
                     erorSet(eror)
