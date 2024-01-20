@@ -25,7 +25,7 @@ import Activate_email from "./components/activate_email/activate_email";
 
 const token=localStorage.getItem("token")
 const services=new Services()
-localStorage.clear()
+//localStorage.clear()
 const App = () => {
 
     return (
@@ -35,7 +35,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
-                    <Route path="/blog" element={<Post/>}/>
+                    <Route path="/blog" element={<Post services={services}/>}/>
                     <Route path="/blog/:id" element={<Blog services={services}/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/profile" element={<User_Profile authToken={token} services={services}/>}/>
