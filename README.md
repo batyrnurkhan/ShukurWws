@@ -34,6 +34,6 @@ Mention the technologies, languages, frameworks, and tools you used in building 
 5. Теперь запускаем наш фронт при помощи команды - **npm start** 
 
 ```bash
-git clone https://github.com/yourusername/shukur-website.git
+git clone https://github.com/batyrnurkhan/ShukurWws.git
 cd shukur-website
 # Add more installation steps as necessary
