@@ -35,5 +35,6 @@ Mention the technologies, languages, frameworks, and tools you used in building 
 
 ```bash
 git clone https://github.com/batyrnurkhan/ShukurWws.git
-cd shukur-website
+For BACKEND - cd shukurWeb
+For FRONTEND - cd shukurfront
 # Add more installation steps as necessary
