@@ -12,9 +12,10 @@ import {useEffect, useState} from "react";
 function Source_mechit({services}){
     const [places,placesSet]=useState()
     useEffect(() => {
-        services.GetResource("/api")
+        services.GetResource("/api/pray/locations/")
             .then(res=>{
                 placesSet(res)
+                console.log(res)
             })
     }, []);
     return(
@@ -41,8 +42,8 @@ function Source_mechit({services}){
                          modules={["control.ZoomControl", "control.FullscreenControl"]}>
                         {places ? (places.map(res=>{
                             return(
-                                res.index=res.location.indexOf(","),
-                                <Placemark geometry={[res.location.slice(0,res.index), res.location.slice(res.index +1,res.location.length)]}
+
+                                <Placemark geometry={[res.latitude, res.longitude]}
                                            modules={["geoObject.addon.balloon", 'geoObject.addon.hint']}
                                            options={
                                                {
