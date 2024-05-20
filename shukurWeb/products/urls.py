@@ -3,6 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('list/', ProductListCreateView.as_view(), name='product-list'),
+    path('categories/', CategoryListView.as_view(), name='category-list'),  # Add this line for categories list
     path('categories/<slug:slug>', CategoryListAPIView.as_view(), name='category-list'),
     path('product-requests/', ProductRequestCreateView.as_view(), name='product-request-create'),
     path("view",Product_View.as_view()),

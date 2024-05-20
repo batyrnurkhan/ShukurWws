@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'blogs',
     'places',
     'pray',
-    'review'
+    'review',
 ]
 
 MIDDLEWARE = [

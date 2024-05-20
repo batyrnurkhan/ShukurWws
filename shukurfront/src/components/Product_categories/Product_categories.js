@@ -11,6 +11,9 @@ import arrowNext from "../HomePageStyle/arrownext.png";
 
 
 function Product_categories({services}){
+        const [categories, setCategories] = useState([]);
+
+
     const [product_list,product_listSet]=useState()
     const [product_list_n,product_list_nSet]=useState()
 
@@ -20,6 +23,14 @@ function Product_categories({services}){
     const { slug } = useParams();
     const navigate = useNavigate();
     useEffect(()=>{
+         services.GetResource('api/products/categories/')
+            .then(res => {
+                setCategories(res);
+            })
+            .catch(err => {
+                console.error('Error fetching categories:', err);
+            });
+
         services.GetResource(`api/products/categories/${slug}/certify`)
             .then(res=>{
                 product_listSet(res)
@@ -66,10 +77,13 @@ function Product_categories({services}){
             {product_list && product_list_n && blogs ? (<div className={"products"}>
                     <h2 className={"pr_h2"}>Продукты</h2>
                     <ul className={"pr_bar"}>
-                        <li><NavLink to={"/product-search"} end className={"product_a"} >Все товары</NavLink></li>
-                        <li><NavLink to={"/product-search/juice"} className={"product_a"} >соки</NavLink></li>
-                        <li><NavLink to={"/product-search/footer"} className={"product_a"}  >еда</NavLink></li>
-                        <li><NavLink to={"/product-search/soda"} className={"product_a"} >гозировка</NavLink></li>
+                        {categories.map((category) => (
+                            <li key={category.slug}>
+                                <NavLink to={`/product-search/${category.slug}`} className={"product_a"}>
+                                    {category.name}
+                                </NavLink>
+                            </li>
+                        ))}
                     </ul>
                     <h2 className={"pr_h2_two"}>Халяльные продукты</h2>
 

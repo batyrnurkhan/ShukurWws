@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import PrayerTimesView, search
-
+import djoser
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
@@ -28,7 +28,7 @@ urlpatterns = [
     path('prayer-times/<int:id>/', PrayerTimesView.as_view(), name='prayer-times'),
     path('api/products/', include('products.urls')),
     path('api/accounts/', include('accounts.urls')),
-    path('api/review',include('review.urls')),
+    path('api/review/',include('review.urls')),
     path('api/blogs/', include('blogs.urls')),
     path('api/', include('places.urls')),
     path('api/pray/', include('pray.urls')),
