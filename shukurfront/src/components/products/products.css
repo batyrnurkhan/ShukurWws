@@ -1,49 +1,57 @@
-ц.products{
+.products {
     max-width: 1600px;
     margin: 0 auto;
 }
-.pr_h2{
+
+.pr_h2 {
     text-align: center;
     font-size: 36px;
     font-style: normal;
     font-weight: 900;
     line-height: normal;
 }
-.pr_bar{
+
+.pr_bar {
     display: flex;
     list-style: none;
     justify-content: center;
 }
-.product_a{
+
+.product_a {
     text-decoration: none;
     margin-left: 34px;
     color: rgba(113, 113, 113, 1);
 }
-.product_a.active{
+
+.product_a.active {
     color: #00A859;
 }
-.pr_bar a:hover{
+
+.pr_bar a:hover {
     color: #36873E;
     text-decoration: underline;
 }
-.pr_h2_two{
+
+.pr_h2_two {
     text-align: center;
     color: #717171;
-
     font-family: Montserrat;
     font-size: 28px;
     font-style: normal;
     font-weight: 900;
     line-height: normal;
 }
-.img_layer{
+
+.img_layer {
     display: flex;
     justify-content: space-around;
 }
-.img_layer img{
+
+.img_layer img {
     width: 72px;
     height: 133px;
 }
+
 .pr_card {
     padding: 25px 0 0 0;
     border-radius: 10px;
@@ -51,8 +59,8 @@
     box-shadow: 0px 9px 18px 7px rgba(0, 0, 0, 0.17);
     flex: 0 0 calc((100% - 3 * 30px) / 4);
     margin-bottom: 100px;
-
 }
+
 .product_row {
     display: flex;
     flex-wrap: wrap;
@@ -62,23 +70,26 @@
     margin: 0 auto;
     max-width: 1600px;
 }
-.pr_card_bolt{
+
+.pr_card_bolt {
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: 162.9%; /* 26.064px */
     display: inline;
 }
-.text_layer{
+
+.text_layer {
     margin-top: 22px;
     margin-left: 25px;
 }
-.pr_card_text{
+
+.pr_card_text {
     width: 80%;
 }
-.pr_card_label{
-    color: #36873E;
 
+.pr_card_label {
+    color: #36873E;
     text-align: right;
     font-family: Montserrat;
     font-size: 16px;
@@ -88,6 +99,7 @@
     text-transform: uppercase;
     margin-right: 15px;
 }
+
 .product_banner {
     display: flex;
     justify-content: center;
@@ -97,24 +109,28 @@
     margin: 0 auto;
     margin-bottom: 85px;
 }
+
 .pr_card:nth-child(4n) {
     margin-right: 0;
 }
+
 .pr_banner_text {
     margin-bottom: 40px;
-
 }
-.product_banner_a{
+
+.product_banner_a {
     color: #000;
     text-decoration: none;
 }
-.pr_banner_text h2{
+
+.pr_banner_text h2 {
     font-size: 32px;
     font-style: normal;
     font-weight: 900;
     line-height: normal;
 }
-.pr_banner_text p{
+
+.pr_banner_text p {
     font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
@@ -123,7 +139,8 @@
     width: 413px;
     margin-bottom: 35px;
 }
-.pr_banner_text a{
+
+.pr_banner_text a {
     color: #FFF;
     font-family: Montserrat;
     font-size: 16px;
@@ -137,12 +154,13 @@
     text-decoration: none;
     margin-bottom: 25px;
 }
-.pr_banner_img img{
+
+.pr_banner_img img {
     margin-top: 37px;
 }
-.Not_halal h2{
-    color: #717171;
 
+.Not_halal h2 {
+    color: #717171;
     font-family: Montserrat;
     font-size: 28px;
     font-style: normal;
@@ -151,12 +169,13 @@
     text-align: center;
     margin-bottom: 32px;
 }
-.not_halal{
+
+.not_halal {
     color: #FF2727;
 }
-.Frequently_viewed h2{
-    color: #717171;
 
+.Frequently_viewed h2 {
+    color: #717171;
     font-family: Montserrat;
     font-size: 28px;
     font-style: normal;
@@ -164,19 +183,104 @@
     line-height: normal;
     text-align: center;
 }
-.pr_slaider{
+
+.pr_slaider {
     position: relative;
 }
-.pr_left{
+
+.pr_left {
     position: absolute;
     left: -30px;
     top: 177px;
 }
-.pr_right{
+
+.pr_right {
     position: absolute;
     right: 50px;
     top: 177px;
 }
-.carousel-container{
+
+.carousel-container {
     max-width: none;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search_input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-results-dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+
+.search-results-dropdown div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-results-dropdown div:hover {
+    background-color: #f0f0f0;
+}
+
+.dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    position: relative; /* Make relative to position the dropdown absolutely within it */
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search-results-dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    top: 100%; /* Position it at the bottom of the input */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Shift it left by half its width */
+    margin-top: 5px; /* Space it a bit from the input */
+}
+
+.search_input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Optional: makes the input take full width of its container */
 }
