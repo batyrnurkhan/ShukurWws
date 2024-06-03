@@ -6,7 +6,7 @@ function Activate_email() {
     const [triger,trigerSet]=useState(false)
     useEffect(()=>{
 
-            fetch("http://127.0.0.1:8000/auth/users/activation/",{
+            fetch("http://91.228.154.48:8000/auth/users/activation/",{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

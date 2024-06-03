@@ -46,7 +46,7 @@ function Products({ services }) {
     }, [location]);
 
     const fetchCategories = () => {
-        axios.get('http://localhost:8000/api/products/categories/')
+        axios.get('http://91.228.154.48:8000/api/products/categories/')
             .then(response => {
                 setCategories(response.data);
             })
@@ -86,7 +86,7 @@ function Products({ services }) {
 
     const fetchSearchResults = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/search/?query=${encodeURIComponent(searchQuery)}`);
+            const response = await axios.get(`http://91.228.154.48:8000/search/?query=${encodeURIComponent(searchQuery)}`);
             setSearchResults(response.data);
         } catch (error) {
             console.error('Error fetching search results', error);

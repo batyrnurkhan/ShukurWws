@@ -18,7 +18,7 @@ function Home(){
     const [activeIndex, setActiveIndex] = useState(0); // To keep track of the current active card
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/blogs/blogposts/') // Make sure this matches your Django URL
+        axios.get('http://91.228.154.48:8000/api/blogs/blogposts/') // Make sure this matches your Django URL
             .then(response => {
                 setBlogs(response.data);
             })
