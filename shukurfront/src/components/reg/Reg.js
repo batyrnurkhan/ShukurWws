@@ -25,6 +25,7 @@ function Reg() {
                     username: login,
                     email: email,
                     password: password,
+                    re_password: password_r,  // Adding re_password field
                     full_name: full_name,
                     phone_number: number,
                     adres: null,
@@ -69,7 +70,7 @@ function Reg() {
                             <input placeholder={"E-mail"} type={"email"} id={"email"} onChange={e => emailSet(e.target.value)} />
                             <Input placeholder="+7XXXXXXXX" value={number} onChange={setNumber} limitMaxLength={true} maxLength={15} />
                             <input placeholder={"Пароль"} type={"password"} id={"password"} onChange={e => passwordSet(e.target.value)} />
-                            <input placeholder={"Повторите пароль"} type={"password"} id={"re_password"} onChange={e => password_r_Set(e.target.value)} />
+                            <input placeholder={"Повторите пароль"} type={"password"} id={"password_review"} onChange={e => password_r_Set(e.target.value)} />
                             <button type={"button"} onClick={() => PostUser()}>Зарегистрировать</button>
                         </form>
                         <h1>{eror}</h1>
