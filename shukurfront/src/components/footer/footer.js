@@ -26,7 +26,7 @@ function Footer() {
 
     const fetchSearchResults = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/search/?query=${encodeURIComponent(searchQuery)}`);
+            const response = await axios.get(`http://91.228.154.48:8000/search/?query=${encodeURIComponent(searchQuery)}`);
             setSearchResults(response.data);
         } catch (error) {
             console.error('Error fetching search results', error);

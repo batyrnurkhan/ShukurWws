@@ -25,7 +25,11 @@ function Products({ services }) {
     useEffect(() => {
         fetchCategories();
         if (slug) {
-            fetchCategoryProducts(slug);
+            if (slug === "all") {
+                fetchProducts();
+            } else {
+                fetchCategoryProducts(slug);
+            }
         } else {
             fetchProducts();
         }
@@ -48,7 +52,7 @@ function Products({ services }) {
     const fetchCategories = () => {
         axios.get('http://91.228.154.48:8000/api/products/categories/')
             .then(response => {
-                setCategories(response.data);
+                setCategories([{ id: 'all', name: 'Все товары', slug: 'all' }, ...response.data]);
             })
             .catch(error => {
                 console.error('Error fetching categories', error);
@@ -121,11 +125,6 @@ function Products({ services }) {
         <div>
             <h2 className="pr_h2">Продукты</h2>
             <ul className="pr_bar">
-                <li>
-                    <NavLink to="/product-search/" className="product_a">
-                        Все товары
-                    </NavLink>
-                </li>
                 {categories.map(category => (
                     <li key={category.id}>
                         <NavLink to={`/product-search/${category.slug}`} className="product_a">
@@ -156,7 +155,7 @@ function Products({ services }) {
                     </div>
                 )}
             </div>
-            {productList.length > 0 || nonCertifiedProductList.length > 0 ? (
+            {(productList.length > 0 || nonCertifiedProductList.length > 0) ? (
                 <div className="products-content">
                     <h2 className="pr_h2_two">Халяльные продукты</h2>
                     <div className="product_row row">
