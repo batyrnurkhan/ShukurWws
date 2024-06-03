@@ -1,86 +1,81 @@
-import vector from "./Vector.svg";
-import "./Reg.css";
-import { useState } from "react";
-import 'react-phone-number-input/style.css';
-import Input from 'react-phone-number-input/input';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function Reg() {
-    const [login, loginSet] = useState("");
-    const [full_name, full_nameSet] = useState("");
-    const [email, emailSet] = useState("");
-    const [number, setNumber] = useState("");
-    const [password, passwordSet] = useState("");
-    const [password_r, password_r_Set] = useState("");
-    const [eror, erorSet] = useState("");
-    const [reg_t, reg_tSet] = useState(false);
+const Register = ({ onRegisterSuccess }) => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [fullName, setFullName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [error, setError] = useState('');
 
-    const RegSubmit = () => {
-        reg_tSet(!reg_t);
-    }
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const userData = {
+            username,
+            email,
+            password,
+            full_name: fullName,
+            phone_number: phoneNumber,
+            adres: null,
+            avatar: null
+        };
+        console.log('Sending data:', userData);  // Отладочный вывод
 
-    const PostUser = async () => {
-        if (password === password_r) {
-            try {
-                const requestBody = {
-                    username: login,
-                    email: email,
-                    password: password,
-                    full_name: full_name,
-                    phone_number: number,
-                    adres: null,
-                    avatar: null
-                };
-                console.log('Request Body:', requestBody);
-
-                const response = await fetch('http://91.228.154.48:8000/auth/users/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-
-                console.log('Response Status:', response.status);
-                const responseData = await response.json();
-                console.log('Response Data:', responseData);
-
-                if (response.status !== 201) {
-                    erorSet(`Ошибка при регистрации: ${JSON.stringify(responseData)}`);
-                } else {
-                    document.location.reload();
-                }
-            } catch (error) {
-                erorSet(`Ошибка соединения: ${error.message}`);
+        try {
+            const response = await axios.post('http://91.228.154.48:8000/auth/users/', userData);
+            onRegisterSuccess(response.data);
+        } catch (error) {
+            console.error('Registration error', error);
+            if (error.response && error.response.data) {
+                setError(`Registration failed: ${JSON.stringify(error.response.data)}`);
+            } else {
+                setError('Registration failed. Please try again.');
             }
-        } else {
-            erorSet("Пароли не совпадают");
         }
-    }
+    };
 
     return (
-        <div>
-            {reg_t ? (
-                <div className={"reg"}>
-                    <div className={"reg_card"}>
-                        <h2>Регистрация</h2>
-                        <form>
-                            <input placeholder={"Логин"} id={"login"} onChange={e => loginSet(e.target.value)} />
-                            <input placeholder={"ФИО"} id={"Full_name"} onChange={e => full_nameSet(e.target.value)} />
-                            <input placeholder={"E-mail"} type={"email"} id={"email"} onChange={e => emailSet(e.target.value)} />
-                            <Input placeholder="+7XXXXXXXX" value={number} onChange={setNumber} limitMaxLength={true} maxLength={15} />
-                            <input placeholder={"Пароль"} type={"password"} id={"password"} onChange={e => passwordSet(e.target.value)} />
-                            <input placeholder={"Повторите пароль"} type={"password"} id={"password_review"} onChange={e => password_r_Set(e.target.value)} />
-                            <button type={"button"} onClick={() => PostUser()}>Зарегистрировать</button>
-                        </form>
-                        <h1>{eror}</h1>
-                        <img src={vector} onClick={() => RegSubmit()} alt="Close" />
-                    </div>
-                </div>
-            ) : (
-                <h3 onClick={() => RegSubmit()}>Регистрация</h3>
-            )}
-        </div>
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                placeholder="Username"
+                required
+            />
+            <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="Email"
+                required
+            />
+            <input
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Password"
+                required
+            />
+            <input
+                type="text"
+                value={fullName}
+                onChange={e => setFullName(e.target.value)}
+                placeholder="Full Name"
+                required
+            />
+            <input
+                type="text"
+                value={phoneNumber}
+                onChange={e => setPhoneNumber(e.target.value)}
+                placeholder="Phone Number"
+                required
+            />
+            {error && <p>{error}</p>}
+            <button type="submit">Register</button>
+        </form>
     );
-}
+};
 
-export default Reg;
+export default Register;
