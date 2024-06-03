@@ -129,14 +129,14 @@ DJOSER = {
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL':True
 }
-EMAIL_HOST='smtp.mail.ru'
-EMAIL_PORT=465
-EMAIL_HOST_USER='kz_shukur@mail.ru'
-EMAIL_HOST_PASSWORD='qTsqjPzhVYUDPU0q7R89'
-EMAIL_USE_SSL=True
-DEFAULT_FROM_EMAIL="kz_shukur@mail.ru"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'makyzhanbatyr@gmail.com'
+EMAIL_HOST_PASSWORD = 'hmqm tvfw xonf zbje'
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 AUTHENTICATION_BACKENDS = (
