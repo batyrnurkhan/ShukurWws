@@ -1,6 +1,4 @@
-// PrayerTimesPage.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './styles/PrayerTimesPage.css';
 
 const PrayerTimesPage = () => {
@@ -61,17 +59,15 @@ const PrayerTimesPage = () => {
     // Determine the current prayer time and highlight it
     const currentPrayerInfo = prayerTimes ? getCurrentPrayer() : 'Loading...';
 
+    // Define the prayers to display
+    const displayPrayers = ["bamdat", "besin", "ekindi", "aqsham", "quptan"];
+
     return (
         <div className="prayer-times-container">
             <h1>Prayer Times in {prayerTimes.attributes.CityName}</h1>
             <div className="current-prayer-time">
                 {currentPrayerInfo}
             </div>
-            {/*<ul className="month-tabs clearfix">*/}
-            {/*    */}
-            {/*    <li><a href="#january" className="active">Январь</a></li>*/}
-            {/*    */}
-            {/*</ul>*/}
             <div className="monthly-prayer-times">
                 <table>
                     <thead>
@@ -82,10 +78,12 @@ const PrayerTimesPage = () => {
                     </thead>
                     <tbody>
                     {Object.entries(prayerTimes.praytimes).map(([key, value]) => (
-                        <tr key={key} className={currentPrayerInfo.startsWith(key) ? 'active-time' : ''}>
-                            <td>{key}</td>
-                            <td>{value}</td>
-                        </tr>
+                        displayPrayers.includes(key) && (
+                            <tr key={key} className={currentPrayerInfo.startsWith(key) ? 'active-time' : ''}>
+                                <td>{key}</td>
+                                <td>{value}</td>
+                            </tr>
+                        )
                     ))}
                     </tbody>
                 </table>

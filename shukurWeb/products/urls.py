@@ -1,16 +1,28 @@
 from django.urls import path
-from .views import *
+from .views import (
+    ProductListCreateView,
+    CategoryListView,
+    CategoryListAPIView,
+    CategoryListAPIViewCertifided,
+    CategoryListAPIViewNotCertifided,
+    ProductRequestCreateView,
+    ProductRaitingView,
+    ProductView,
+    ProductViewCertifided,
+    ProductViewNotCertifided,
+    FrequentlyViewedView
+)
 
 urlpatterns = [
     path('list/', ProductListCreateView.as_view(), name='product-list'),
-    path('categories/', CategoryListView.as_view(), name='category-list'),  # Add this line for categories list
-    path('categories/<slug:slug>', CategoryListAPIView.as_view(), name='category-list'),
+    path('categories/', CategoryListView.as_view(), name='category-list'),
+    path('categories/<slug:slug>/', CategoryListAPIView.as_view(), name='category-list-detail'),
     path('product-requests/', ProductRequestCreateView.as_view(), name='product-request-create'),
-    path("view",Product_View.as_view()),
-    path("certify",Product_View_certifided.as_view()),
-    path("not_certify",Product_View_not_certifided.as_view()),
-    path("frequently_viewed",Frequently_viewed_View.as_view()),
-    path("view/<int:pk>",Product_Raiting_View.as_view()),
-    path("categories/<slug:slug>/certify",CategoryListAPIView_certifided.as_view()),
-    path("categories/<slug:slug>/not_certify",CategoryListAPIView_not_certifided.as_view())
+    path('view/', ProductView.as_view(), name='product-view'),
+    path('certify/', ProductViewCertifided.as_view(), name='product-certifided'),
+    path('not_certify/', ProductViewNotCertifided.as_view(), name='product-not-certifided'),
+    path('frequently_viewed/', FrequentlyViewedView.as_view(), name='frequently-viewed'),
+    path('view/<int:pk>/', ProductRaitingView.as_view(), name='product-rating-view'),
+    path('categories/<slug:slug>/certify/', CategoryListAPIViewCertifided.as_view(), name='category-certifided'),
+    path('categories/<slug:slug>/not_certify/', CategoryListAPIViewNotCertifided.as_view(), name='category-not-certifided'),
 ]
