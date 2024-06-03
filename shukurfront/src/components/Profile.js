@@ -3,16 +3,18 @@ import axios from 'axios';
 
 const Profile = ({ authToken }) => {
     const [profile, setProfile] = useState(null);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/accounts/user_profile', {
+                const response = await axios.get('http://91.228.154.48:8000/api/accounts/user_profile', {
                     headers: { Authorization: `Token ${authToken}` },
                 });
                 setProfile(response.data);
             } catch (error) {
                 console.error('Error fetching profile', error);
+                setError('Failed to fetch profile');
             }
         };
 
@@ -21,7 +23,9 @@ const Profile = ({ authToken }) => {
 
     return (
         <div>
-            {profile ? (
+            {error ? (
+                <p>{error}</p>
+            ) : profile ? (
                 <div>
                     <p>Username: {profile.username}</p>
                     <p>Email: {profile.email}</p>
