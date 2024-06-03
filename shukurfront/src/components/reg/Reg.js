@@ -21,29 +21,36 @@ function Reg() {
     const PostUser = async () => {
         if (password === password_r) {
             try {
+                const requestBody = {
+                    username: login,
+                    email: email,
+                    password: password,
+                    full_name: full_name,
+                    phone_number: number,
+                    adres: null,
+                    avatar: null
+                };
+                console.log('Request Body:', requestBody);
+
                 const response = await fetch('http://91.228.154.48:8000/auth/users/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        username: login,
-                        email: email,
-                        password: password,
-                        full_name: full_name,
-                        phone_number: number,
-                        adres: null,
-                        avatar: null
-                    })
+                    body: JSON.stringify(requestBody)
                 });
 
+                console.log('Response Status:', response.status);
+                const responseData = await response.json();
+                console.log('Response Data:', responseData);
+
                 if (response.status !== 201) {
-                    erorSet("Ошибка при регистрации");
+                    erorSet(`Ошибка при регистрации: ${JSON.stringify(responseData)}`);
                 } else {
                     document.location.reload();
                 }
             } catch (error) {
-                erorSet("Ошибка соединения: " + error.message);
+                erorSet(`Ошибка соединения: ${error.message}`);
             }
         } else {
             erorSet("Пароли не совпадают");
